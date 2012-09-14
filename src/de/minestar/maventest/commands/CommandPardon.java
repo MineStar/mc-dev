@@ -28,23 +28,4 @@ public class CommandPardon extends AbstractCommand {
     public List addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         return par2ArrayOfStr.length == 1 ? getListOfStringsFromIterableMatchingLastWord(par2ArrayOfStr, MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().func_73712_c().keySet()) : null;
     }
-
-    /**
-     * Returns a List of strings (chosen from the given string iterable) which the last word in the given string array is a beginning-match for. (Tab completion).
-     */
-    private List getListOfStringsFromIterableMatchingLastWord(String[] par0ArrayOfStr, Iterable par1Iterable) {
-        String var2 = par0ArrayOfStr[par0ArrayOfStr.length - 1];
-        ArrayList var3 = new ArrayList();
-        Iterator var4 = par1Iterable.iterator();
-
-        while (var4.hasNext()) {
-            String var5 = (String) var4.next();
-
-            if (doesStringStartWith(var2, var5)) {
-                var3.add(var5);
-            }
-        }
-
-        return var3;
-    }
 }

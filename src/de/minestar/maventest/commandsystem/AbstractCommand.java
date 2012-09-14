@@ -2,6 +2,8 @@ package de.minestar.maventest.commandsystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import net.minecraft.src.ICommandSender;
 import de.minestar.maventest.commandsystem.annotations.Arguments;
@@ -368,5 +370,51 @@ public abstract class AbstractCommand {
 
     public boolean canCommandSenderUseCommand(ICommandSender sender) {
         return this.hasPermission(sender);
+    }
+
+    /**
+     * Adds the strings available in this command to the given list of tab completion options.
+     */
+    public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
+        return null;
+    }
+
+    /**
+     * Returns a List of strings (chosen from the given strings) which the last word in the given string array is a beginning-match for. (Tab completion).
+     */
+    public static List<String> getListOfStringsMatchingLastWord(String[] par0ArrayOfStr, String... par1ArrayOfStr) {
+        String var2 = par0ArrayOfStr[par0ArrayOfStr.length - 1];
+        ArrayList<String> var3 = new ArrayList<String>();
+        String[] var4 = par1ArrayOfStr;
+        int var5 = par1ArrayOfStr.length;
+
+        for (int var6 = 0; var6 < var5; ++var6) {
+            String var7 = var4[var6];
+
+            if (doesStringStartWith(var2, var7)) {
+                var3.add(var7);
+            }
+        }
+
+        return var3;
+    }
+
+    /**
+     * Returns a List of strings (chosen from the given string iterable) which the last word in the given string array is a beginning-match for. (Tab completion).
+     */
+    public static List<String> getListOfStringsFromIterableMatchingLastWord(String[] par0ArrayOfStr, Iterable<String> par1Iterable) {
+        String var2 = par0ArrayOfStr[par0ArrayOfStr.length - 1];
+        ArrayList<String> var3 = new ArrayList<String>();
+        Iterator<String> var4 = par1Iterable.iterator();
+
+        while (var4.hasNext()) {
+            String var5 = (String) var4.next();
+
+            if (doesStringStartWith(var2, var5)) {
+                var3.add(var5);
+            }
+        }
+
+        return var3;
     }
 }
