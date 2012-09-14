@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.ICommandSender;
+import net.minecraft.src.NumberInvalidException;
+import net.minecraft.src.PlayerNotFoundException;
 import de.minestar.maventest.commandsystem.annotations.Arguments;
-import de.minestar.maventest.commandsystem.annotations.Description;
 import de.minestar.maventest.commandsystem.annotations.ExecuteSuperCommand;
 import de.minestar.maventest.commandsystem.annotations.Label;
 
@@ -29,7 +33,7 @@ public abstract class AbstractCommand {
 
     // needed vars for each command
     private final String commandLabel;
-    private String arguments, description;
+    private String arguments;
 
     // list of subcommands
     public HashMap<String, AbstractCommand> subCommands = new HashMap<String, AbstractCommand>();
@@ -45,7 +49,6 @@ public abstract class AbstractCommand {
         // fetch the annotations for this command
         Label labelAnnotation = this.getClass().getAnnotation(Label.class);
         Arguments argumentAnnotation = this.getClass().getAnnotation(Arguments.class);
-        Description descriptionAnnotation = this.getClass().getAnnotation(Description.class);
 
         // Save the label. NOTE: If the label is not set, this will throw an
         // RuntimeException and the command won't be registered.
@@ -69,13 +72,6 @@ public abstract class AbstractCommand {
             this.arguments = argumentAnnotation.arguments();
         }
         this.syntaxTree = new SyntaxTree(this.arguments);
-
-        // get the description
-        if (descriptionAnnotation == null) {
-            this.description = "";
-        } else {
-            this.description = descriptionAnnotation.description();
-        }
 
         // get the execution-params
         this.executeSuperCommand = this.getClass().isAnnotationPresent(ExecuteSuperCommand.class);
@@ -241,15 +237,6 @@ public abstract class AbstractCommand {
     }
 
     /**
-     * Get the description.
-     * 
-     * @return the description
-     */
-    public final String getDescription() {
-        return description;
-    }
-
-    /**
      * Register a new subcommand for this command.
      * 
      * @param command
@@ -382,7 +369,7 @@ public abstract class AbstractCommand {
     /**
      * Returns a List of strings (chosen from the given strings) which the last word in the given string array is a beginning-match for. (Tab completion).
      */
-    public static List<String> getListOfStringsMatchingLastWord(String[] par0ArrayOfStr, String... par1ArrayOfStr) {
+    protected static List<String> getListOfStringsMatchingLastWord(String[] par0ArrayOfStr, String... par1ArrayOfStr) {
         String var2 = par0ArrayOfStr[par0ArrayOfStr.length - 1];
         ArrayList<String> var3 = new ArrayList<String>();
         String[] var4 = par1ArrayOfStr;
@@ -402,7 +389,7 @@ public abstract class AbstractCommand {
     /**
      * Returns a List of strings (chosen from the given string iterable) which the last word in the given string array is a beginning-match for. (Tab completion).
      */
-    public static List<String> getListOfStringsFromIterableMatchingLastWord(String[] par0ArrayOfStr, Iterable<String> par1Iterable) {
+    protected static List<String> getListOfStringsFromIterableMatchingLastWord(String[] par0ArrayOfStr, Iterable<String> par1Iterable) {
         String var2 = par0ArrayOfStr[par0ArrayOfStr.length - 1];
         ArrayList<String> var3 = new ArrayList<String>();
         Iterator<String> var4 = par1Iterable.iterator();
@@ -417,4 +404,59 @@ public abstract class AbstractCommand {
 
         return var3;
     }
+
+    /**
+     * Parses an int from the given string.
+     */
+    protected int parseInt(ICommandSender par0ICommandSender, String par1Str) {
+        try {
+            return Integer.parseInt(par1Str);
+        } catch (NumberFormatException var3) {
+            throw new NumberInvalidException("commands.generic.num.invalid", new Object[]{par1Str});
+        }
+    }
+
+    /**
+     * Parses an int from the given string within a specified bound.
+     */
+    protected int parseIntBounded(ICommandSender par0ICommandSender, String par1Str, int par2, int par3) {
+        int var4 = parseInt(par0ICommandSender, par1Str);
+
+        if (var4 < par2) {
+            throw new NumberInvalidException("commands.generic.num.tooSmall", new Object[]{Integer.valueOf(var4), Integer.valueOf(par2)});
+        } else if (var4 > par3) {
+            throw new NumberInvalidException("commands.generic.num.tooBig", new Object[]{Integer.valueOf(var4), Integer.valueOf(par3)});
+        } else {
+            return var4;
+        }
+    }
+
+    /**
+     * Returns the given ICommandSender as a EntityPlayer or throw an exception.
+     */
+    protected EntityPlayer getCommandSenderAsPlayer(ICommandSender par0ICommandSender) {
+        if (par0ICommandSender instanceof EntityPlayer) {
+            return (EntityPlayer) par0ICommandSender;
+        } else {
+            throw new PlayerNotFoundException("You must specify which player you wish to perform this action on.", new Object[0]);
+        }
+    }
+
+    protected EntityPlayer getPlayerByName(String par1Str) {
+        EntityPlayerMP var2 = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(par1Str);
+
+        if (var2 == null) {
+            throw new PlayerNotFoundException();
+        } else {
+            return var2;
+        }
+    }
+
+    /**
+     * Parses an int from the given sring with a specified minimum.
+     */
+    protected int parseIntWithMin(ICommandSender par0ICommandSender, String par1Str, int par2) {
+        return parseIntBounded(par0ICommandSender, par1Str, par2, Integer.MAX_VALUE);
+    }
+
 }

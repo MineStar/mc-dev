@@ -1,5 +1,7 @@
 package de.minestar.maventest.commands;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import net.minecraft.server.MinecraftServer;
@@ -10,12 +12,10 @@ import de.minestar.maventest.commandsystem.AbstractCommand;
 import de.minestar.maventest.commandsystem.ArgumentList;
 import de.minestar.maventest.commandsystem.MinestarCommandHandler;
 import de.minestar.maventest.commandsystem.annotations.Arguments;
-import de.minestar.maventest.commandsystem.annotations.Description;
 import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "ban")
 @Arguments(arguments = "<PlayerName> [Reason...]")
-@Description(description = "")
 public class CommandBan extends AbstractCommand {
 
     public static final Pattern IPMatcher = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
@@ -52,5 +52,27 @@ public class CommandBan extends AbstractCommand {
 
         // send notification
         MinestarCommandHandler.notifyAdmins(sender, "commands.ban.success", new Object[]{playerName});
+    }
+
+    @Override
+    public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
+        if (par2ArrayOfStr.length == 1) {
+            String var3 = par2ArrayOfStr[par2ArrayOfStr.length - 1];
+            ArrayList<String> var4 = new ArrayList<String>();
+            String[] var5 = MinecraftServer.getServer().getPlayerNamesAsList();
+            int var6 = var5.length;
+
+            for (int var7 = 0; var7 < var6; ++var7) {
+                String var8 = var5[var7];
+
+                if (doesStringStartWith(var3, var8)) {
+                    var4.add(var8);
+                }
+            }
+
+            return var4;
+        } else {
+            return null;
+        }
     }
 }

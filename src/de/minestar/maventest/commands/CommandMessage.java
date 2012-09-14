@@ -6,12 +6,10 @@ import net.minecraft.src.ICommandSender;
 import de.minestar.maventest.commandsystem.AbstractCommand;
 import de.minestar.maventest.commandsystem.ArgumentList;
 import de.minestar.maventest.commandsystem.annotations.Arguments;
-import de.minestar.maventest.commandsystem.annotations.Description;
 import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "tell")
 @Arguments(arguments = "<PlayerName> <Message> [...]")
-@Description(description = "")
 public class CommandMessage extends AbstractCommand {
 
     @Override

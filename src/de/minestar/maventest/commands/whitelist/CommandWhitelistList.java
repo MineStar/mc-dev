@@ -7,18 +7,16 @@ import net.minecraft.src.ICommandSender;
 import de.minestar.maventest.commandsystem.AbstractCommand;
 import de.minestar.maventest.commandsystem.ArgumentList;
 import de.minestar.maventest.commandsystem.annotations.Arguments;
-import de.minestar.maventest.commandsystem.annotations.Description;
 import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "list")
 @Arguments(arguments = "")
-@Description(description = "")
 public class CommandWhitelistList extends AbstractCommand {
 
     @Override
     public void execute(ICommandSender sender, ArgumentList argumentList) {
 
-        Set whiteList = MinecraftServer.getServer().getConfigurationManager().getWhiteListedIPs();
+        Set<String> whiteList = MinecraftServer.getServer().getConfigurationManager().getWhiteListedIPs();
         sender.sendMessage(sender.translateString("commands.whitelist.list", whiteList.size(), MinecraftServer.getServer().getConfigurationManager().func_72373_m().length));
         sender.sendMessage(joinNiceString(whiteList.toArray()));
 

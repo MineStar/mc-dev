@@ -11,12 +11,10 @@ import de.minestar.maventest.commandsystem.AbstractCommand;
 import de.minestar.maventest.commandsystem.ArgumentList;
 import de.minestar.maventest.commandsystem.MinestarCommandHandler;
 import de.minestar.maventest.commandsystem.annotations.Arguments;
-import de.minestar.maventest.commandsystem.annotations.Description;
 import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "gamemode")
 @Arguments(arguments = "0|1|2|classic|creative|adventure [<PlayerName>]")
-@Description(description = "")
 public class CommandGameMode extends AbstractCommand {
 
     private EnumGameType getGameType(String argument) {
@@ -69,8 +67,7 @@ public class CommandGameMode extends AbstractCommand {
     }
 
     /**
-     * Adds the strings available in this command to the given list of tab
-     * completion options.
+     * Adds the strings available in this command to the given list of tab completion options.
      */
     @Override
     public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {

@@ -6,12 +6,10 @@ import de.minestar.maventest.commandsystem.AbstractCommand;
 import de.minestar.maventest.commandsystem.ArgumentList;
 import de.minestar.maventest.commandsystem.MinestarCommandHandler;
 import de.minestar.maventest.commandsystem.annotations.Arguments;
-import de.minestar.maventest.commandsystem.annotations.Description;
 import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "toggledownfall")
 @Arguments(arguments = "")
-@Description(description = "")
 public class CommandToggleDownfall extends AbstractCommand {
 
     @Override

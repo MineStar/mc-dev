@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
+
 import net.minecraft.server.MinecraftServer;
 
 public abstract class ServerConfigurationManager {
@@ -26,10 +27,10 @@ public abstract class ServerConfigurationManager {
     private final BanList field_72413_h = new BanList(new File("banned-ips.txt"));
 
     /** A set containing the OPs. */
-    private Set ops = new HashSet();
+    private Set<String> ops = new HashSet<String>();
 
     /** The Set of all whitelisted players */
-    private Set whiteListedPlayers = new HashSet();
+    private Set<String> whiteListedPlayers = new HashSet<String>();
 
     /** Reference to the PlayerNBTManager object. */
     private IPlayerFileData playerNBTManagerObj;
@@ -541,7 +542,7 @@ public abstract class ServerConfigurationManager {
     /**
      * returns the set of whitelisted ip addresses
      */
-    public Set getWhiteListedIPs() {
+    public Set<String> getWhiteListedIPs() {
         return this.whiteListedPlayers;
     }
 

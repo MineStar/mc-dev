@@ -8,12 +8,10 @@ import de.minestar.maventest.commandsystem.AbstractCommand;
 import de.minestar.maventest.commandsystem.ArgumentList;
 import de.minestar.maventest.commandsystem.MinestarCommandHandler;
 import de.minestar.maventest.commandsystem.annotations.Arguments;
-import de.minestar.maventest.commandsystem.annotations.Description;
 import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "save-all")
 @Arguments(arguments = "")
-@Description(description = "")
 public class CommandSaveAll extends AbstractCommand {
 
     @Override

@@ -7,12 +7,10 @@ import net.minecraft.src.ICommandSender;
 import de.minestar.maventest.commandsystem.AbstractCommand;
 import de.minestar.maventest.commandsystem.ArgumentList;
 import de.minestar.maventest.commandsystem.annotations.Arguments;
-import de.minestar.maventest.commandsystem.annotations.Description;
 import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "kill")
 @Arguments(arguments = "[PlayerName...]")
-@Description(description = "")
 public class CommandKill extends AbstractCommand {
 
     @Override

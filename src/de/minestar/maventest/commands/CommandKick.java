@@ -1,5 +1,8 @@
 package de.minestar.maventest.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.ICommandSender;
@@ -7,12 +10,10 @@ import de.minestar.maventest.commandsystem.AbstractCommand;
 import de.minestar.maventest.commandsystem.ArgumentList;
 import de.minestar.maventest.commandsystem.MinestarCommandHandler;
 import de.minestar.maventest.commandsystem.annotations.Arguments;
-import de.minestar.maventest.commandsystem.annotations.Description;
 import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "kick")
 @Arguments(arguments = "<PlayerName> [Reason...]")
-@Description(description = "")
 public class CommandKick extends AbstractCommand {
 
     @Override
@@ -42,6 +43,28 @@ public class CommandKick extends AbstractCommand {
             MinestarCommandHandler.notifyAdmins(sender, "commands.kick.success.reason", new Object[]{player.getEntityName(), reason});
         } else {
             MinestarCommandHandler.notifyAdmins(sender, "commands.kick.success", new Object[]{player.getEntityName()});
+        }
+    }
+
+    @Override
+    public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
+        if (par2ArrayOfStr.length == 1) {
+            String var3 = par2ArrayOfStr[par2ArrayOfStr.length - 1];
+            ArrayList<String> var4 = new ArrayList<String>();
+            String[] var5 = MinecraftServer.getServer().getPlayerNamesAsList();
+            int var6 = var5.length;
+
+            for (int var7 = 0; var7 < var6; ++var7) {
+                String var8 = var5[var7];
+
+                if (doesStringStartWith(var3, var8)) {
+                    var4.add(var8);
+                }
+            }
+
+            return var4;
+        } else {
+            return null;
         }
     }
 }
