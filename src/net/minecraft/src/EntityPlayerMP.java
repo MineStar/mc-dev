@@ -708,7 +708,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         this.playerNetServerHandler.sendPacket(new Packet70GameEvent(3, par1EnumGameType.getID()));
     }
 
-    public void func_70006_a(String par1Str) {
+    public void sendMessage(String par1Str) {
         this.playerNetServerHandler.sendPacket(new Packet3Chat(par1Str));
     }
 

@@ -28,7 +28,7 @@ public class RConConsoleSource implements ICommandSender {
         return "Rcon";
     }
 
-    public void func_70006_a(String par1Str) {
+    public void sendMessage(String par1Str) {
         this.buffer.append(par1Str);
     }
 

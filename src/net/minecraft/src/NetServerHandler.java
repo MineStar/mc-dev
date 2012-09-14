@@ -572,7 +572,7 @@ public class NetServerHandler extends NetHandler {
      * Processes a / command
      */
     private void handleSlashCommand(String par1Str) {
-        this.mcServer.func_71187_D().func_71556_a(this.playerEntity, par1Str);
+        this.mcServer.getCommandHandler().handleCommand(this.playerEntity, par1Str);
     }
 
     public void handleAnimation(Packet18Animation par1Packet18Animation) {

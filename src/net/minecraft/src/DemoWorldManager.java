@@ -29,7 +29,7 @@ public class DemoWorldManager extends ItemInWorldManager {
 
         if (var1 % 24000L == 500L) {
             if (var3 <= 6L) {
-                this.thisPlayerMP.func_70006_a(this.thisPlayerMP.translateString("demo.day." + var3, new Object[0]));
+                this.thisPlayerMP.sendMessage(this.thisPlayerMP.translateString("demo.day." + var3, new Object[0]));
             }
         } else if (var3 == 1L) {
             if (var1 == 100L) {
@@ -40,7 +40,7 @@ public class DemoWorldManager extends ItemInWorldManager {
                 this.thisPlayerMP.playerNetServerHandler.sendPacket(new Packet70GameEvent(5, 103));
             }
         } else if (var3 == 5L && var1 % 24000L == 22000L) {
-            this.thisPlayerMP.func_70006_a(this.thisPlayerMP.translateString("demo.day.warning", new Object[0]));
+            this.thisPlayerMP.sendMessage(this.thisPlayerMP.translateString("demo.day.warning", new Object[0]));
         }
     }
 
@@ -49,7 +49,7 @@ public class DemoWorldManager extends ItemInWorldManager {
      */
     private void sendDemoReminder() {
         if (this.field_73104_e > 100) {
-            this.thisPlayerMP.func_70006_a(this.thisPlayerMP.translateString("demo.reminder", new Object[0]));
+            this.thisPlayerMP.sendMessage(this.thisPlayerMP.translateString("demo.reminder", new Object[0]));
             this.field_73104_e = 0;
         }
     }

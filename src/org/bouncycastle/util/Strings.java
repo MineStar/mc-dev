@@ -2,20 +2,20 @@ package org.bouncycastle.util;
 
 public final class Strings {
     public static String func_74830_a(String par0Str) {
-        boolean var1 = false;
-        char[] var2 = par0Str.toCharArray();
+        boolean flag = false;
+        char ac[] = par0Str.toCharArray();
 
-        for (int var3 = 0; var3 != var2.length; ++var3) {
-            char var4 = var2[var3];
+        for (int i = 0; i != ac.length; i++) {
+            char c = ac[i];
 
-            if (65 <= var4 && 90 >= var4) {
-                var1 = true;
-                var2[var3] = (char) (var4 - 65 + 97);
+            if ('A' <= c && 'Z' >= c) {
+                flag = true;
+                ac[i] = (char) ((c - 65) + 97);
             }
         }
 
-        if (var1) {
-            return new String(var2);
+        if (flag) {
+            return new String(ac);
         } else {
             return par0Str;
         }

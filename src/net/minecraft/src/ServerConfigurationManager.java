@@ -21,7 +21,7 @@ public abstract class ServerConfigurationManager {
     private final MinecraftServer mcServer;
 
     /** A list of player entities that exist on this server. */
-    public final List playerEntityList = new ArrayList();
+    public final List<EntityPlayerMP> playerEntityList = new ArrayList<EntityPlayerMP>();
     private final BanList field_72401_g = new BanList(new File("banned-players.txt"));
     private final BanList field_72413_h = new BanList(new File("banned-ips.txt"));
 

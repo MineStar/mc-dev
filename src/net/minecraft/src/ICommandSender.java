@@ -6,7 +6,7 @@ public interface ICommandSender {
      */
     String getCommandSenderName();
 
-    void func_70006_a(String var1);
+    void sendMessage(String message);
 
     /**
      * Returns true if the command sender is allowed to use the given command.

@@ -11,13 +11,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import net.minecraft.src.AnvilSaveConverter;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.CallableIsServerModded;
 import net.minecraft.src.CallablePlayers;
 import net.minecraft.src.CallableServerProfiler;
 import net.minecraft.src.ChunkCoordinates;
-import net.minecraft.src.CommandBase;
 import net.minecraft.src.ConvertProgressUpdater;
 import net.minecraft.src.CrashReport;
 import net.minecraft.src.DedicatedServer;
@@ -39,7 +39,6 @@ import net.minecraft.src.PlayerUsageSnooper;
 import net.minecraft.src.Profiler;
 import net.minecraft.src.RConConsoleSource;
 import net.minecraft.src.ReportedException;
-import net.minecraft.src.ServerCommandManager;
 import net.minecraft.src.ServerConfigurationManager;
 import net.minecraft.src.StatList;
 import net.minecraft.src.StringTranslate;
@@ -53,6 +52,8 @@ import net.minecraft.src.WorldServer;
 import net.minecraft.src.WorldServerMulti;
 import net.minecraft.src.WorldSettings;
 import net.minecraft.src.WorldType;
+import de.minestar.maventest.commandsystem.AbstractCommand;
+import de.minestar.maventest.commandsystem.MinestarCommandHandler;
 
 public abstract class MinecraftServer implements Runnable, IPlayerUsage, ICommandSender {
     /** The logging system. */
@@ -68,7 +69,7 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
 
     /** List of names of players who are online. */
     private final List playersOnline = new ArrayList();
-    private final ICommandManager commandManager;
+    private final MinestarCommandHandler commandHandler;
     public final Profiler theProfiler = new Profiler();
 
     /** The server's hostname. */
@@ -145,7 +146,7 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
     public MinecraftServer(File par1File) {
         mcServer = this;
         this.anvilFile = par1File;
-        this.commandManager = new ServerCommandManager();
+        this.commandHandler = new MinestarCommandHandler();
         this.anvilConverterForAnvilFile = new AnvilSaveConverter(par1File);
     }
 
@@ -717,7 +718,7 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
      */
     public String handleRConCommand(String par1Str) {
         RConConsoleSource.instance.resetLog();
-        this.commandManager.func_71556_a(RConConsoleSource.instance, par1Str);
+        this.commandHandler.handleCommand(RConConsoleSource.instance, par1Str);
         return RConConsoleSource.instance.getLogContents();
     }
 
@@ -769,16 +770,16 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
         return par1CrashReport;
     }
 
-    public List func_71248_a(ICommandSender par1ICommandSender, String par2Str) {
-        ArrayList var3 = new ArrayList();
+    public List<String> func_71248_a(ICommandSender par1ICommandSender, String par2Str) {
+        ArrayList<String> var3 = new ArrayList<String>();
 
         if (par2Str.startsWith("/")) {
             par2Str = par2Str.substring(1);
             boolean var10 = !par2Str.contains(" ");
-            List var11 = this.commandManager.func_71558_b(par1ICommandSender, par2Str);
+            List<String> var11 = this.commandHandler.getTabCompletionOptions(par1ICommandSender, par2Str);
 
             if (var11 != null) {
-                Iterator var12 = var11.iterator();
+                Iterator<String> var12 = var11.iterator();
 
                 while (var12.hasNext()) {
                     String var13 = (String) var12.next();
@@ -801,7 +802,7 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
             for (int var8 = 0; var8 < var7; ++var8) {
                 String var9 = var6[var8];
 
-                if (CommandBase.doesStringStartWith(var5, var9)) {
+                if (AbstractCommand.doesStringStartWith(var5, var9)) {
                     var3.add(var9);
                 }
             }
@@ -824,7 +825,7 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
         return "Server";
     }
 
-    public void func_70006_a(String par1Str) {
+    public void sendMessage(String par1Str) {
         logger.info(StringUtils.stripControlCodes(par1Str));
     }
 
@@ -842,8 +843,8 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
         return StringTranslate.getInstance().translateKeyFormat(par1Str, par2ArrayOfObj);
     }
 
-    public ICommandManager func_71187_D() {
-        return this.commandManager;
+    public MinestarCommandHandler getCommandHandler() {
+        return this.commandHandler;
     }
 
     /**

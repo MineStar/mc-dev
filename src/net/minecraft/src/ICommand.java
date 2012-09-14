@@ -2,12 +2,12 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public interface ICommand extends Comparable {
+public interface ICommand extends Comparable<Object> {
     String getCommandName();
 
     String getCommandUsage(ICommandSender var1);
 
-    List getCommandAliases();
+    List<String> getCommandAliases();
 
     void processCommand(ICommandSender var1, String[] var2);
 
@@ -19,5 +19,5 @@ public interface ICommand extends Comparable {
     /**
      * Adds the strings available in this command to the given list of tab completion options.
      */
-    List addTabCompletionOptions(ICommandSender var1, String[] var2);
+    List<String> addTabCompletionOptions(ICommandSender var1, String[] var2);
 }

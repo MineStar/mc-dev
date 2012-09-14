@@ -6,6 +6,6 @@ public class ASN1ObjectIdentifier extends DERObjectIdentifier {
     }
 
     public ASN1ObjectIdentifier func_71612_a(String par1Str) {
-        return new ASN1ObjectIdentifier(this.func_71609_b() + "." + par1Str);
+        return new ASN1ObjectIdentifier((new StringBuilder()).append(func_71609_b()).append(".").append(par1Str).toString());
     }
 }

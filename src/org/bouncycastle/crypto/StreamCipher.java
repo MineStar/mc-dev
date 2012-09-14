@@ -1,7 +1,7 @@
 package org.bouncycastle.crypto;
 
 public interface StreamCipher {
-    byte func_74851_a(byte var1);
+    public abstract byte func_74851_a(byte byte0);
 
-    void func_74850_a(byte[] var1, int var2, int var3, byte[] var4, int var5) throws DataLengthException;
+    public abstract void func_74850_a(byte abyte0[], int i, int j, byte abyte1[], int k) throws DataLengthException;
 }

@@ -216,7 +216,7 @@ public class DedicatedServer extends MinecraftServer implements IServer {
     public void func_71333_ah() {
         while (!this.field_71341_l.isEmpty()) {
             ServerCommand var1 = (ServerCommand) this.field_71341_l.remove(0);
-            this.func_71187_D().func_71556_a(var1.field_73701_b, var1.command);
+            this.getCommandHandler().handleCommand(var1.commandSender, var1.command);
         }
     }
 

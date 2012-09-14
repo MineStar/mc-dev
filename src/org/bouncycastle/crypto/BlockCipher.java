@@ -1,13 +1,13 @@
 package org.bouncycastle.crypto;
 
 public interface BlockCipher {
-    void func_71805_a(boolean var1, CipherParameters var2) throws IllegalArgumentException;
+    public abstract void func_71805_a(boolean flag, CipherParameters cipherparameters) throws IllegalArgumentException;
 
-    String func_71802_a();
+    public abstract String func_71802_a();
 
-    int func_71804_b();
+    public abstract int func_71804_b();
 
-    int func_71806_a(byte[] var1, int var2, byte[] var3, int var4) throws DataLengthException, IllegalStateException;
+    public abstract int func_71806_a(byte abyte0[], int i, byte abyte1[], int j) throws DataLengthException, IllegalStateException;
 
-    void func_71803_c();
+    public abstract void func_71803_c();
 }
