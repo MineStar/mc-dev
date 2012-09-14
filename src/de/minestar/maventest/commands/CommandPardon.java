@@ -20,6 +20,7 @@ public class CommandPardon extends AbstractCommand {
         MinestarCommandHandler.notifyAdmins(sender, "commands.unban.success", argumentList.getString(0));
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
         return par2ArrayOfStr.length == 1 ? getListOfStringsFromIterableMatchingLastWord(par2ArrayOfStr, MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().func_73712_c().keySet()) : null;
