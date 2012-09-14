@@ -9,9 +9,23 @@ import java.util.Map.Entry;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.IAdminCommand;
-import net.minecraft.src.ICommand;
 import net.minecraft.src.ICommandSender;
+import de.minestar.maventest.commands.CommandBan;
+import de.minestar.maventest.commands.CommandGameMode;
 import de.minestar.maventest.commands.CommandKick;
+import de.minestar.maventest.commands.CommandKill;
+import de.minestar.maventest.commands.CommandList;
+import de.minestar.maventest.commands.CommandMessage;
+import de.minestar.maventest.commands.CommandOp;
+import de.minestar.maventest.commands.CommandPardon;
+import de.minestar.maventest.commands.CommandPardonIp;
+import de.minestar.maventest.commands.CommandPublishLocal;
+import de.minestar.maventest.commands.CommandSaveAll;
+import de.minestar.maventest.commands.CommandSaveOff;
+import de.minestar.maventest.commands.CommandSaveOn;
+import de.minestar.maventest.commands.CommandSay;
+import de.minestar.maventest.commands.CommandStop;
+import de.minestar.maventest.commands.CommandTp;
 
 public class MinestarCommandHandler implements IAdminCommand {
 
@@ -26,7 +40,22 @@ public class MinestarCommandHandler implements IAdminCommand {
      */
     public MinestarCommandHandler() {
         this.registeredCommands = new HashMap<String, AbstractCommand>();
+        this.registerCommand(new CommandBan());
+        this.registerCommand(new CommandGameMode());
         this.registerCommand(new CommandKick());
+        this.registerCommand(new CommandKill());
+        this.registerCommand(new CommandList());
+        this.registerCommand(new CommandMessage());
+        this.registerCommand(new CommandOp());
+        this.registerCommand(new CommandPardon());
+        this.registerCommand(new CommandPardonIp());
+        this.registerCommand(new CommandPublishLocal());
+        this.registerCommand(new CommandSaveAll());
+        this.registerCommand(new CommandSaveOff());
+        this.registerCommand(new CommandSaveOn());
+        this.registerCommand(new CommandSay());
+        this.registerCommand(new CommandStop());
+        this.registerCommand(new CommandTp());
         INSTANCE = this;
     }
 
@@ -74,6 +103,7 @@ public class MinestarCommandHandler implements IAdminCommand {
         // is the command == null => command is registered by bukkit, but not in
         // the commandhandler
         if (command == null) {
+            sender.sendMessage("Command not found!");
             return false;
         }
 
@@ -133,8 +163,8 @@ public class MinestarCommandHandler implements IAdminCommand {
             while (var6.hasNext()) {
                 Entry<String, AbstractCommand> var7 = var6.next();
 
-                if (AbstractCommand.doesStringStartWith(var4, var7.getKey()) && var7.getValue().canCommandSenderUseCommand(par1ICommandSender)) {
-                    list.add(var7.getKey());
+                if (AbstractCommand.doesStringStartWith("/" + var4, var7.getKey()) && var7.getValue().canCommandSenderUseCommand(par1ICommandSender)) {
+                    list.add(var7.getKey().substring(1));
                 }
             }
 

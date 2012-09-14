@@ -1,5 +1,7 @@
 package de.minestar.maventest.commands;
 
+import java.util.List;
+
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.EnumGameType;
@@ -13,7 +15,7 @@ import de.minestar.maventest.commandsystem.annotations.Description;
 import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "gamemode")
-@Arguments(arguments = "0|1|2|classic|survival|adventure [<PlayerName>]")
+@Arguments(arguments = "0|1|2|classic|creative|adventure [<PlayerName>]")
 @Description(description = "This is a normal command. It is a single command with 1 needed parameter and endless optional parameters.")
 public class CommandGameMode extends AbstractCommand {
 
@@ -64,5 +66,17 @@ public class CommandGameMode extends AbstractCommand {
         } else {
             MinestarCommandHandler.notifyOps(sender, 1, "commands.gamemode.success.self", new Object[]{localeText});
         }
+    }
+
+    /**
+     * Adds the strings available in this command to the given list of tab completion options.
+     */
+    @Override
+    public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
+        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, new String[]{"survival", "creative", "adventure"}) : (par2ArrayOfStr.length == 2 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, this.getPlayerList()) : null);
+    }
+
+    protected String[] getPlayerList() {
+        return MinecraftServer.getServer().getPlayerNamesAsList();
     }
 }

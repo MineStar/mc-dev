@@ -230,10 +230,10 @@ public abstract class AbstractCommand {
     public final String getSyntax() {
         // iterate over every parent and add the label in front of the current
         // syntax
-        String syntax = this.getLabel();
+        String syntax = "/" + this.getLabel();
         AbstractCommand parent = this.parentCommand;
         while (parent != null) {
-            syntax = parent.getLabel() + " " + syntax;
+            syntax = "/" + parent.getLabel() + " " + syntax;
             parent = parent.parentCommand;
         }
         syntax += " " + this.getArguments();
@@ -280,7 +280,7 @@ public abstract class AbstractCommand {
      * Print the syntax for this command.
      */
     public final void printWrongSyntax(ICommandSender sender) {
-        sender.sendMessage("Falsche Syntax!");
+        sender.sendMessage("Wrong syntax!");
         this.listCommand(sender);
     }
     /**
