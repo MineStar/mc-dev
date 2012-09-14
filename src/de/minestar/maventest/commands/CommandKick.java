@@ -20,7 +20,7 @@ public class CommandKick extends AbstractCommand {
         String playerName = argumentList.getString(0);
         String reason = "";
 
-        for (String txt : argumentList.getIterator(String.class, 0)) {
+        for (String txt : argumentList.getIterator(String.class, 1)) {
             reason += txt + " ";
         }
         if (reason.length() > 1) {
