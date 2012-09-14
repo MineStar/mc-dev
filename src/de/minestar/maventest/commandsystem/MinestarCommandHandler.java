@@ -127,28 +127,39 @@ public class MinestarCommandHandler implements IAdminCommand {
         String var4 = var3[0];
 
         if (var3.length == 1) {
-            ArrayList<String> var8 = new ArrayList<String>();
+            ArrayList<String> list = new ArrayList<String>();
             Iterator<Entry<String, AbstractCommand>> var6 = this.registeredCommands.entrySet().iterator();
 
             while (var6.hasNext()) {
                 Entry<String, AbstractCommand> var7 = var6.next();
 
-                if (AbstractCommand.doesStringStartWith(var4, (String) var7.getKey()) && ((AbstractCommand) var7.getValue()).canCommandSenderUseCommand(par1ICommandSender)) {
-                    var8.add(var7.getKey());
+                if (AbstractCommand.doesStringStartWith(var4, var7.getKey()) && var7.getValue().canCommandSenderUseCommand(par1ICommandSender)) {
+                    list.add(var7.getKey());
                 }
             }
 
-            return var8;
+            return list;
         } else {
-            // if (var3.length > 1) {
-            // ICommand var5 = (ICommand) this.field_71562_a.get(var4);
-            //
-            // if (var5 != null) {
-            // return var5.addTabCompletionOptions(par1ICommandSender, t(var3));
-            // }
-            // }
+            if (var3.length > 1) {
+                AbstractCommand var5 = this.registeredCommands.get(var4);
+
+                if (var5 != null) {
+                    return var5.addTabCompletionOptions(par1ICommandSender, createArguments(var3));
+                }
+            }
 
             return null;
         }
     }
+
+    private static String[] createArguments(String[] par0ArrayOfStr) {
+        String[] var1 = new String[par0ArrayOfStr.length - 1];
+
+        for (int var2 = 1; var2 < par0ArrayOfStr.length; ++var2) {
+            var1[var2 - 1] = par0ArrayOfStr[var2];
+        }
+
+        return var1;
+    }
+
 }
