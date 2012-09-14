@@ -24,8 +24,13 @@ import de.minestar.maventest.commands.CommandSaveAll;
 import de.minestar.maventest.commands.CommandSaveOff;
 import de.minestar.maventest.commands.CommandSaveOn;
 import de.minestar.maventest.commands.CommandSay;
+import de.minestar.maventest.commands.CommandShowSeed;
 import de.minestar.maventest.commands.CommandStop;
+import de.minestar.maventest.commands.CommandToggleDownfall;
 import de.minestar.maventest.commands.CommandTp;
+import de.minestar.maventest.commands.CommandXP;
+import de.minestar.maventest.commands.time.CommandTime;
+import de.minestar.maventest.commands.whitelist.CommandWhitelist;
 
 public class MinestarCommandHandler implements IAdminCommand {
 
@@ -54,8 +59,13 @@ public class MinestarCommandHandler implements IAdminCommand {
         this.registerCommand(new CommandSaveOff());
         this.registerCommand(new CommandSaveOn());
         this.registerCommand(new CommandSay());
+        this.registerCommand(new CommandShowSeed());
         this.registerCommand(new CommandStop());
+        this.registerCommand(new CommandTime());
+        this.registerCommand(new CommandToggleDownfall());
         this.registerCommand(new CommandTp());
+        this.registerCommand(new CommandXP());
+        this.registerCommand(new CommandWhitelist());
         INSTANCE = this;
     }
 
