@@ -52,8 +52,8 @@ import net.minecraft.src.WorldServer;
 import net.minecraft.src.WorldServerMulti;
 import net.minecraft.src.WorldSettings;
 import net.minecraft.src.WorldType;
-import de.minestar.maventest.commandsystem.AbstractCommand;
-import de.minestar.maventest.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.AbstractCommand;
+import de.minestar.commandsystem.MinestarCommandHandler;
 
 public abstract class MinecraftServer implements Runnable, IPlayerUsage, ICommandSender {
     /** The logging system. */
