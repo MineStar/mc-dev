@@ -829,6 +829,18 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
         logger.info(StringUtils.stripControlCodes(par1Str));
     }
 
+    public void sendError(String par1Str) {
+        logger.info(StringUtils.stripControlCodes(par1Str));
+    }
+
+    public void sendInfo(String par1Str) {
+        logger.info(StringUtils.stripControlCodes(par1Str));
+    }
+
+    public void sendSuccess(String par1Str) {
+        logger.info(StringUtils.stripControlCodes(par1Str));
+    }
+
     /**
      * Returns true if the command sender is allowed to use the given command.
      */

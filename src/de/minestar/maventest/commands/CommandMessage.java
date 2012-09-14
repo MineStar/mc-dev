@@ -16,13 +16,13 @@ public class CommandMessage extends AbstractCommand {
     public void execute(ICommandSender sender, ArgumentList argumentList) {
         EntityPlayerMP target = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(argumentList.getString(0));
         if (target == null) {
-            sender.sendMessage("Player not found");
+            sender.sendError("Player not found");
         } else if (target == sender) {
-            sender.sendMessage("You can't whisper yourself!");
+            sender.sendError("You can't whisper yourself!");
         } else {
             String text = getText(argumentList);
-            target.sendMessage("\u00a77\u00a7o" + target.translateString("commands.message.display.incoming", new Object[]{sender.getCommandSenderName(), text}));
-            sender.sendMessage("\u00a77\u00a7o" + sender.translateString("commands.message.display.outgoing", new Object[]{target.getCommandSenderName(), text}));
+            target.sendInfo("\u00a77\u00a7o" + target.translateString("commands.message.display.incoming", new Object[]{sender.getCommandSenderName(), text}));
+            sender.sendInfo("\u00a77\u00a7o" + sender.translateString("commands.message.display.outgoing", new Object[]{target.getCommandSenderName(), text}));
         }
     }
 

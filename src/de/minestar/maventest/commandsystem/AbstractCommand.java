@@ -408,55 +408,55 @@ public abstract class AbstractCommand {
     /**
      * Parses an int from the given string.
      */
-    protected int parseInt(ICommandSender par0ICommandSender, String par1Str) {
+    protected int parseInt(ICommandSender sender, String text) {
         try {
-            return Integer.parseInt(par1Str);
-        } catch (NumberFormatException var3) {
-            throw new NumberInvalidException("commands.generic.num.invalid", new Object[]{par1Str});
+            return Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            throw new NumberInvalidException("commands.generic.num.invalid", new Object[]{text});
         }
     }
 
     /**
      * Parses an int from the given string within a specified bound.
      */
-    protected int parseIntBounded(ICommandSender par0ICommandSender, String par1Str, int par2, int par3) {
-        int var4 = parseInt(par0ICommandSender, par1Str);
+    protected int parseIntBounded(ICommandSender sender, String text, int minimum, int maximum) {
+        int var = parseInt(sender, text);
 
-        if (var4 < par2) {
-            throw new NumberInvalidException("commands.generic.num.tooSmall", new Object[]{Integer.valueOf(var4), Integer.valueOf(par2)});
-        } else if (var4 > par3) {
-            throw new NumberInvalidException("commands.generic.num.tooBig", new Object[]{Integer.valueOf(var4), Integer.valueOf(par3)});
+        if (var < minimum) {
+            throw new NumberInvalidException("commands.generic.num.tooSmall", new Object[]{Integer.valueOf(var), Integer.valueOf(minimum)});
+        } else if (var > maximum) {
+            throw new NumberInvalidException("commands.generic.num.tooBig", new Object[]{Integer.valueOf(var), Integer.valueOf(maximum)});
         } else {
-            return var4;
+            return var;
         }
     }
 
     /**
      * Returns the given ICommandSender as a EntityPlayer or throw an exception.
      */
-    protected EntityPlayer getCommandSenderAsPlayer(ICommandSender par0ICommandSender) {
-        if (par0ICommandSender instanceof EntityPlayer) {
-            return (EntityPlayer) par0ICommandSender;
+    protected EntityPlayerMP getCommandSenderAsPlayer(ICommandSender sender) {
+        if (sender instanceof EntityPlayer) {
+            return (EntityPlayerMP) sender;
         } else {
             throw new PlayerNotFoundException("You must specify which player you wish to perform this action on.", new Object[0]);
         }
     }
 
-    protected EntityPlayer getPlayerByName(String par1Str) {
-        EntityPlayerMP var2 = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(par1Str);
+    protected EntityPlayer getPlayerByName(String playerName) {
+        EntityPlayerMP player = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerName);
 
-        if (var2 == null) {
+        if (player == null) {
             throw new PlayerNotFoundException();
         } else {
-            return var2;
+            return player;
         }
     }
 
     /**
      * Parses an int from the given sring with a specified minimum.
      */
-    protected int parseIntWithMin(ICommandSender par0ICommandSender, String par1Str, int par2) {
-        return parseIntBounded(par0ICommandSender, par1Str, par2, Integer.MAX_VALUE);
+    protected int parseIntWithMin(ICommandSender sender, String text, int minimum) {
+        return parseIntBounded(sender, text, minimum, Integer.MAX_VALUE);
     }
 
 }

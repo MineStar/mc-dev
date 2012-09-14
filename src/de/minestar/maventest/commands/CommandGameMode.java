@@ -32,7 +32,7 @@ public class CommandGameMode extends AbstractCommand {
         // GET GAME-TYPE BY ARGUMENT 0
         EnumGameType gameType = this.getGameType(argumentList.getString(0));
         if (gameType.equals(EnumGameType.NOT_SET)) {
-            sender.sendMessage("§c" + "GameType '" + argumentList.getString(0) + "' is not valid!");
+            sender.sendError("GameType '" + argumentList.getString(0) + "' is not valid!");
             return;
         }
 
@@ -43,13 +43,13 @@ public class CommandGameMode extends AbstractCommand {
             target = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(argumentList.getString(1));
             // is the player found?
             if (target == null) {
-                sender.sendMessage("§c" + "Player '" + argumentList.getString(1) + "' not found!");
+                sender.sendError("Player '" + argumentList.getString(1) + "' not found!");
                 return;
             }
         } else {
             // is the player found?
             if (target == null) {
-                sender.sendMessage("§c" + "Player '" + sender.getCommandSenderName() + "' not found!");
+                sender.sendError("Player '" + sender.getCommandSenderName() + "' not found!");
                 return;
             }
         }

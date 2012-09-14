@@ -33,7 +33,7 @@ public class CommandKick extends AbstractCommand {
         EntityPlayerMP player = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerName);
 
         if (player == null) {
-            sender.sendMessage("§cPlayer not found!");
+            sender.sendError("Player not found!");
             return;
         }
 

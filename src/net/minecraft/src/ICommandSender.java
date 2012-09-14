@@ -6,7 +6,13 @@ public interface ICommandSender {
      */
     String getCommandSenderName();
 
+    void sendInfo(String message);
+
+    void sendError(String message);
+
     void sendMessage(String message);
+
+    void sendSuccess(String message);
 
     /**
      * Returns true if the command sender is allowed to use the given command.

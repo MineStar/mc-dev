@@ -13,8 +13,8 @@ public class CommandList extends AbstractCommand {
 
     @Override
     public void execute(ICommandSender sender, ArgumentList argumentList) {
-        sender.sendMessage(sender.translateString("commands.players.list", new Object[]{Integer.valueOf(MinecraftServer.getServer().playersOnline()), Integer.valueOf(MinecraftServer.getServer().getMaxPlayers())}));
-        sender.sendMessage(MinecraftServer.getServer().getConfigurationManager().getPlayerList());
+        sender.sendInfo(sender.translateString("commands.players.list", new Object[]{Integer.valueOf(MinecraftServer.getServer().playersOnline()), Integer.valueOf(MinecraftServer.getServer().getMaxPlayers())}));
+        sender.sendInfo(MinecraftServer.getServer().getConfigurationManager().getPlayerList());
     }
 
 }

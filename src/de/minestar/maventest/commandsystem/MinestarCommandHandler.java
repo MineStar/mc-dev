@@ -149,7 +149,7 @@ public class MinestarCommandHandler implements IAdminCommand {
             EntityPlayerMP var6 = (EntityPlayerMP) iterator.next();
 
             if (var6 != par1ICommandSender && MinecraftServer.getServer().getConfigurationManager().isOp(var6.username)) {
-                var6.sendMessage("\u00a77\u00a7o[" + par1ICommandSender.getCommandSenderName() + ": " + var6.translateString(par3Str, par4ArrayOfObj) + "]");
+                var6.sendInfo("\u00a77\u00a7o[" + par1ICommandSender.getCommandSenderName() + ": " + var6.translateString(par3Str, par4ArrayOfObj) + "]");
             }
         }
 
@@ -158,7 +158,7 @@ public class MinestarCommandHandler implements IAdminCommand {
         }
 
         if ((par2 & 1) != 1) {
-            par1ICommandSender.sendMessage(par1ICommandSender.translateString(par3Str, par4ArrayOfObj));
+            par1ICommandSender.sendInfo(par1ICommandSender.translateString(par3Str, par4ArrayOfObj));
         }
     }
 

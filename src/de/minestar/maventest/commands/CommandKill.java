@@ -25,7 +25,7 @@ public class CommandKill extends AbstractCommand {
                 target = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerName);
                 if (target == null) {
                     sender.sendMessage("§cPlayer '" + playerName + "' not found!");
-                    return;
+                    continue;
                 }
 
                 // ATTACK PLAYER
@@ -33,17 +33,17 @@ public class CommandKill extends AbstractCommand {
                 sender.sendMessage("Ouch. That look like it hurt.");
             }
         } else {
-            target = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(sender.getCommandSenderName());
+            target = this.getCommandSenderAsPlayer(sender);
 
             if (target == null) {
-                sender.sendMessage("§cPlayer '" + sender.getCommandSenderName() + "' not found!");
+                sender.sendError("Player '" + sender.getCommandSenderName() + "' not found!");
                 return;
             }
         }
 
         // ATTACK PLAYER
         target.attackEntityFrom(DamageSource.outOfWorld, 1000);
-        sender.sendMessage("Ouch. That look like it hurt.");
+        sender.sendInfo("Ouch. That look like it hurt.");
     }
 
     @Override

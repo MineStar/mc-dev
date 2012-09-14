@@ -17,8 +17,8 @@ public class CommandWhitelistList extends AbstractCommand {
     public void execute(ICommandSender sender, ArgumentList argumentList) {
 
         Set<String> whiteList = MinecraftServer.getServer().getConfigurationManager().getWhiteListedIPs();
-        sender.sendMessage(sender.translateString("commands.whitelist.list", whiteList.size(), MinecraftServer.getServer().getConfigurationManager().func_72373_m().length));
-        sender.sendMessage(joinNiceString(whiteList.toArray()));
+        sender.sendInfo(sender.translateString("commands.whitelist.list", whiteList.size(), MinecraftServer.getServer().getConfigurationManager().func_72373_m().length));
+        sender.sendInfo(joinNiceString(whiteList.toArray()));
 
     }
 

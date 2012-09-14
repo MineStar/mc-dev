@@ -712,6 +712,18 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         this.playerNetServerHandler.sendPacket(new Packet3Chat(par1Str));
     }
 
+    public void sendInfo(String par1Str) {
+        this.playerNetServerHandler.sendPacket(new Packet3Chat("§7" + par1Str));
+    }
+
+    public void sendError(String par1Str) {
+        this.playerNetServerHandler.sendPacket(new Packet3Chat("§3" + par1Str));
+    }
+
+    public void sendSuccess(String par1Str) {
+        this.playerNetServerHandler.sendPacket(new Packet3Chat("§a" + par1Str));
+    }
+
     /**
      * Returns true if the command sender is allowed to use the given command.
      */

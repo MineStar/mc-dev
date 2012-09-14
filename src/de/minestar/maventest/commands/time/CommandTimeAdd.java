@@ -23,8 +23,8 @@ public class CommandTimeAdd extends AbstractCommand {
 
     protected void addTime(ICommandSender par1ICommandSender, int par2) {
         for (int i = 0; i < MinecraftServer.getServer().theWorldServer.length; ++i) {
-            WorldServer var4 = MinecraftServer.getServer().theWorldServer[i];
-            var4.setTime(var4.getWorldTime() + (long) par2);
+            WorldServer worldServer = MinecraftServer.getServer().theWorldServer[i];
+            worldServer.setTime(worldServer.getWorldTime() + (long) par2);
         }
     }
 }

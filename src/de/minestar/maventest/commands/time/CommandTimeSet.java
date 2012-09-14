@@ -29,9 +29,8 @@ public class CommandTimeSet extends AbstractCommand {
     }
 
     protected void setTimeInAllWorlds(ICommandSender par1ICommandSender, int par2) {
-        for (int var3 = 0; var3 < MinecraftServer.getServer().theWorldServer.length; ++var3) {
-            MinecraftServer.getServer().theWorldServer[var3].setTime((long) par2);
+        for (int index = 0; index < MinecraftServer.getServer().theWorldServer.length; ++index) {
+            MinecraftServer.getServer().theWorldServer[index].setTime((long) par2);
         }
-
     }
 }

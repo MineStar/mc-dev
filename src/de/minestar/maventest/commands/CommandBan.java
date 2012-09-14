@@ -37,7 +37,7 @@ public class CommandBan extends AbstractCommand {
         // search the player
         EntityPlayerMP player = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerName);
         if (player == null) {
-            sender.sendMessage("§cPlayer '" + playerName + "' not found!");
+            sender.sendError("Player '" + playerName + "' not found!");
             return;
         }
 

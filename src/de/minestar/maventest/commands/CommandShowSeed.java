@@ -14,6 +14,6 @@ public class CommandShowSeed extends AbstractCommand {
     @Override
     public void execute(ICommandSender sender, ArgumentList argumentList) {
         EntityPlayer player = getCommandSenderAsPlayer(sender);
-        sender.sendMessage("Seed: " + player.worldObj.getSeed());
+        sender.sendInfo("Seed: " + player.worldObj.getSeed());
     }
 }

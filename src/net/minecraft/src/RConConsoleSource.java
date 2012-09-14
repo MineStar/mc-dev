@@ -32,6 +32,18 @@ public class RConConsoleSource implements ICommandSender {
         this.buffer.append(par1Str);
     }
 
+    public void sendError(String par1Str) {
+        this.buffer.append(par1Str);
+    }
+
+    public void sendInfo(String par1Str) {
+        this.buffer.append(par1Str);
+    }
+
+    public void sendSuccess(String par1Str) {
+        this.buffer.append(par1Str);
+    }
+
     /**
      * Returns true if the command sender is allowed to use the given command.
      */
