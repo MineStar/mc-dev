@@ -4,7 +4,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.CommandHandler;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -24,7 +24,7 @@ public class CommandTimeSet extends AbstractCommand {
             time = parseIntWithMin(sender, timeString, 0);
 
         setTimeInAllWorlds(sender, time);
-        MinestarCommandHandler.notifyAdmins(sender, "commands.time.set", time);
+        CommandHandler.notifyAdmins(sender, "commands.time.set", time);
 
     }
 

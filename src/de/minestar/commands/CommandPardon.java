@@ -6,7 +6,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.CommandHandler;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -17,7 +17,7 @@ public class CommandPardon extends AbstractCommand {
     @Override
     public void execute(ICommandSender sender, ArgumentList argumentList) {
         MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().removeBan(argumentList.getString(0));
-        MinestarCommandHandler.notifyAdmins(sender, "commands.unban.success", argumentList.getString(0));
+        CommandHandler.notifyAdmins(sender, "commands.unban.success", argumentList.getString(0));
     }
 
     @SuppressWarnings("unchecked")

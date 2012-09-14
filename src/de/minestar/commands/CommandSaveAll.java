@@ -6,7 +6,7 @@ import net.minecraft.src.MinecraftException;
 import net.minecraft.src.WorldServer;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.CommandHandler;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -34,11 +34,11 @@ public class CommandSaveAll extends AbstractCommand {
                 }
             }
         } catch (MinecraftException e) {
-            MinestarCommandHandler.notifyAdmins(sender, "commands.save.failed", e.getMessage());
+            CommandHandler.notifyAdmins(sender, "commands.save.failed", e.getMessage());
             return;
         }
 
-        MinestarCommandHandler.notifyAdmins(sender, "commands.save.success");
+        CommandHandler.notifyAdmins(sender, "commands.save.success");
     }
 
 }

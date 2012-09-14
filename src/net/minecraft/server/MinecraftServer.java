@@ -53,7 +53,7 @@ import net.minecraft.src.WorldServerMulti;
 import net.minecraft.src.WorldSettings;
 import net.minecraft.src.WorldType;
 import de.minestar.commandsystem.AbstractCommand;
-import de.minestar.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.CommandHandler;
 
 public abstract class MinecraftServer implements Runnable, IPlayerUsage, ICommandSender {
     /** The logging system. */
@@ -69,7 +69,7 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
 
     /** List of names of players who are online. */
     private final List playersOnline = new ArrayList();
-    private final MinestarCommandHandler commandHandler;
+    private final CommandHandler commandHandler;
     public final Profiler theProfiler = new Profiler();
 
     /** The server's hostname. */
@@ -146,7 +146,7 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
     public MinecraftServer(File par1File) {
         mcServer = this;
         this.anvilFile = par1File;
-        this.commandHandler = new MinestarCommandHandler();
+        this.commandHandler = new CommandHandler();
         this.anvilConverterForAnvilFile = new AnvilSaveConverter(par1File);
     }
 
@@ -855,7 +855,7 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
         return StringTranslate.getInstance().translateKeyFormat(par1Str, par2ArrayOfObj);
     }
 
-    public MinestarCommandHandler getCommandHandler() {
+    public CommandHandler getCommandHandler() {
         return this.commandHandler;
     }
 

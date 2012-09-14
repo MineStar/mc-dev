@@ -4,7 +4,7 @@ import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.CommandHandler;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -24,6 +24,6 @@ public class CommandXP extends AbstractCommand {
         }
 
         player.addExperience(xp);
-        MinestarCommandHandler.notifyAdmins(sender, "commands.xp.success", xp, player.getEntityName());
+        CommandHandler.notifyAdmins(sender, "commands.xp.success", xp, player.getEntityName());
     }
 }

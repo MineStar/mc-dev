@@ -7,7 +7,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.CommandHandler;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -19,7 +19,7 @@ public class CommandOp extends AbstractCommand {
     public void execute(ICommandSender sender, ArgumentList argumentList) {
 
         MinecraftServer.getServer().getConfigurationManager().addOp(argumentList.getString(0));
-        MinestarCommandHandler.notifyAdmins(sender, "command.op.success", argumentList.getString(0));
+        CommandHandler.notifyAdmins(sender, "command.op.success", argumentList.getString(0));
     }
 
     @Override

@@ -8,7 +8,7 @@ import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.CommandHandler;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -40,9 +40,9 @@ public class CommandKick extends AbstractCommand {
         player.playerNetServerHandler.kickPlayer(reason);
 
         if (reason.length() > 0) {
-            MinestarCommandHandler.notifyAdmins(sender, "commands.kick.success.reason", new Object[]{player.getEntityName(), reason});
+            CommandHandler.notifyAdmins(sender, "commands.kick.success.reason", new Object[]{player.getEntityName(), reason});
         } else {
-            MinestarCommandHandler.notifyAdmins(sender, "commands.kick.success", new Object[]{player.getEntityName()});
+            CommandHandler.notifyAdmins(sender, "commands.kick.success", new Object[]{player.getEntityName()});
         }
     }
 

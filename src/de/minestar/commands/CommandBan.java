@@ -10,7 +10,7 @@ import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.CommandHandler;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -51,7 +51,7 @@ public class CommandBan extends AbstractCommand {
         player.playerNetServerHandler.kickPlayer("You are banned from this server.");
 
         // send notification
-        MinestarCommandHandler.notifyAdmins(sender, "commands.ban.success", new Object[]{playerName});
+        CommandHandler.notifyAdmins(sender, "commands.ban.success", new Object[]{playerName});
     }
 
     @Override

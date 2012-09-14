@@ -32,18 +32,18 @@ import de.minestar.commands.CommandXP;
 import de.minestar.commands.time.CommandTime;
 import de.minestar.commands.whitelist.CommandWhitelist;
 
-public class MinestarCommandHandler implements IAdminCommand {
+public class CommandHandler implements IAdminCommand {
 
     public HashMap<String, AbstractCommand> registeredCommands;
 
-    private static MinestarCommandHandler INSTANCE;
+    private static CommandHandler INSTANCE;
 
     /**
      * Constructor. The given pluginname will be used in the registered commands.
      * 
      * @param pluginName
      */
-    public MinestarCommandHandler() {
+    public CommandHandler() {
         this.registeredCommands = new HashMap<String, AbstractCommand>();
         this.registerCommand(new CommandBan());
         this.registerCommand(new CommandGameMode());

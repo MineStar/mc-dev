@@ -9,7 +9,7 @@ import net.minecraft.src.ICommandSender;
 import net.minecraft.src.StatCollector;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.CommandHandler;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -60,9 +60,9 @@ public class CommandGameMode extends AbstractCommand {
         // send locale message
         String localeText = StatCollector.translateToLocal("gameMode." + gameType.getName());
         if (sender != target) {
-            MinestarCommandHandler.notifyOps(sender, 1, "commands.gamemode.success.other", new Object[]{target.getEntityName(), localeText});
+            CommandHandler.notifyOps(sender, 1, "commands.gamemode.success.other", new Object[]{target.getEntityName(), localeText});
         } else {
-            MinestarCommandHandler.notifyOps(sender, 1, "commands.gamemode.success.self", new Object[]{localeText});
+            CommandHandler.notifyOps(sender, 1, "commands.gamemode.success.self", new Object[]{localeText});
         }
     }
 

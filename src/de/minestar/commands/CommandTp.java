@@ -6,7 +6,7 @@ import net.minecraft.src.ICommandSender;
 import net.minecraft.src.PlayerNotFoundException;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.CommandHandler;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -36,7 +36,7 @@ public class CommandTp extends AbstractCommand {
                     throw new PlayerNotFoundException();
 
                 player.playerNetServerHandler.teleportTo(player2.posX, player2.posY, player2.posZ, player2.rotationYaw, player2.rotationPitch);
-                MinestarCommandHandler.notifyAdmins(sender, "commands.tp.success", player.getEntityName(), player2.getEntityName());
+                CommandHandler.notifyAdmins(sender, "commands.tp.success", player.getEntityName(), player2.getEntityName());
             } else if (player.worldObj != null) {
                 int i = argumentList.length() - 3;
                 int max = 30000000;
@@ -44,7 +44,7 @@ public class CommandTp extends AbstractCommand {
                 int y = parseIntBounded(sender, argumentList.getString(i++), 0, 256);
                 int z = parseIntBounded(sender, argumentList.getString(i++), -max, max);
                 player.setPositionAndUpdate((double) ((float) x + 0.5F), (double) y, (double) ((float) z + 0.5F));
-                MinestarCommandHandler.notifyAdmins(sender, "commands.tp.coordinates", player.getEntityName(), x, y, z);
+                CommandHandler.notifyAdmins(sender, "commands.tp.coordinates", player.getEntityName(), x, y, z);
             }
 
         }

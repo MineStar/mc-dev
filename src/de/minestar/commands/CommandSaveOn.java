@@ -4,7 +4,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.MinestarCommandHandler;
+import de.minestar.commandsystem.CommandHandler;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -23,7 +23,7 @@ public class CommandSaveOn extends AbstractCommand {
             }
         }
 
-        MinestarCommandHandler.notifyAdmins(sender, "commands.save.disabled");
+        CommandHandler.notifyAdmins(sender, "commands.save.disabled");
     }
 
 }
