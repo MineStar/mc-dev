@@ -11,7 +11,7 @@ import de.minestar.maventest.commandsystem.annotations.Label;
 @Label(label = "list")
 @Arguments(arguments = "")
 @Description(description = "")
-public class CmmandList extends AbstractCommand {
+public class CommandList extends AbstractCommand {
 
     @Override
     public void execute(ICommandSender sender, ArgumentList argumentList) {
