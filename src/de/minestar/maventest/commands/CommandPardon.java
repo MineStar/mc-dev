@@ -21,7 +21,7 @@ public class CommandPardon extends AbstractCommand {
     @Override
     public void execute(ICommandSender sender, ArgumentList argumentList) {
 
-        MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().func_73709_b(argumentList.getString(0));
+        MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().removeBan(argumentList.getString(0));
         MinestarCommandHandler.notifyAdmins(sender, "commands.unban.success", argumentList.getString(0));
     }
 
@@ -30,9 +30,7 @@ public class CommandPardon extends AbstractCommand {
     }
 
     /**
-     * Returns a List of strings (chosen from the given string iterable) which
-     * the last word in the given string array is a beginning-match for. (Tab
-     * completion).
+     * Returns a List of strings (chosen from the given string iterable) which the last word in the given string array is a beginning-match for. (Tab completion).
      */
     private List getListOfStringsFromIterableMatchingLastWord(String[] par0ArrayOfStr, Iterable par1Iterable) {
         String var2 = par0ArrayOfStr[par0ArrayOfStr.length - 1];

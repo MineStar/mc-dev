@@ -1,6 +1,9 @@
 package de.minestar.maventest.commands;
 
+import java.util.regex.Pattern;
+
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.src.BanEntry;
 import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.ICommandSender;
 import de.minestar.maventest.commandsystem.AbstractCommand;
@@ -10,10 +13,12 @@ import de.minestar.maventest.commandsystem.annotations.Arguments;
 import de.minestar.maventest.commandsystem.annotations.Description;
 import de.minestar.maventest.commandsystem.annotations.Label;
 
-@Label(label = "kick")
+@Label(label = "ban")
 @Arguments(arguments = "<PlayerName> [Reason...]")
 @Description(description = "This is a normal command. It is a single command with 1 needed parameter and endless optional parameters.")
-public class CommandKick extends AbstractCommand {
+public class CommandBan extends AbstractCommand {
+
+    public static final Pattern IPMatcher = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 
     @Override
     public void execute(ICommandSender sender, ArgumentList argumentList) {
@@ -26,22 +31,26 @@ public class CommandKick extends AbstractCommand {
         if (reason.length() > 1) {
             reason = reason.substring(0, reason.length() - 1);
         } else {
-            reason = "Kicked by an operator.";
+            reason = "Banned by an operator.";
         }
 
+        // search the player
         EntityPlayerMP player = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerName);
-
         if (player == null) {
-            sender.sendMessage("§cPlayer not found!");
+            sender.sendMessage("§cPlayer '" + playerName + "' not found!");
             return;
         }
 
-        player.playerNetServerHandler.kickPlayer(reason);
+        // add the player to the banlist
+        BanEntry banEntry = new BanEntry(playerName);
+        banEntry.setSource(sender.getCommandSenderName());
+        banEntry.setReason(reason);
+        MinecraftServer.getServer().getConfigurationManager().getBannedPlayers().addBan(banEntry);
 
-        if (reason.length() > 0) {
-            MinestarCommandHandler.notifyAdmins(sender, "commands.kick.success.reason", new Object[]{player.getEntityName(), reason});
-        } else {
-            MinestarCommandHandler.notifyAdmins(sender, "commands.kick.success", new Object[]{player.getEntityName()});
-        }
+        // kick him
+        player.playerNetServerHandler.kickPlayer("You are banned from this server.");
+
+        // send notification
+        MinestarCommandHandler.notifyAdmins(sender, "commands.ban.success", new Object[]{playerName});
     }
 }

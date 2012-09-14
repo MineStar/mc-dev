@@ -179,10 +179,10 @@ public abstract class ServerConfigurationManager {
     public String func_72399_a(SocketAddress par1SocketAddress, String par2Str) {
         if (this.field_72401_g.func_73704_a(par2Str)) {
             BanEntry var6 = (BanEntry) this.field_72401_g.func_73712_c().get(par2Str);
-            String var7 = "You are banned from this server!\nReason: " + var6.func_73686_f();
+            String var7 = "You are banned from this server!\nReason: " + var6.getReason();
 
-            if (var6.func_73680_d() != null) {
-                var7 = var7 + "\nYour ban will be removed on " + field_72403_e.format(var6.func_73680_d());
+            if (var6.getExpireDate() != null) {
+                var7 = var7 + "\nYour ban will be removed on " + field_72403_e.format(var6.getExpireDate());
             }
 
             return var7;
@@ -195,10 +195,10 @@ public abstract class ServerConfigurationManager {
 
             if (this.field_72413_h.func_73704_a(var3)) {
                 BanEntry var4 = (BanEntry) this.field_72413_h.func_73712_c().get(var3);
-                String var5 = "Your IP address is banned from this server!\nReason: " + var4.func_73686_f();
+                String var5 = "Your IP address is banned from this server!\nReason: " + var4.getReason();
 
-                if (var4.func_73680_d() != null) {
-                    var5 = var5 + "\nYour ban will be removed on " + field_72403_e.format(var4.func_73680_d());
+                if (var4.getExpireDate() != null) {
+                    var5 = var5 + "\nYour ban will be removed on " + field_72403_e.format(var4.getExpireDate());
                 }
 
                 return var5;

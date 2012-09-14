@@ -642,8 +642,8 @@ public class NetServerHandler extends NetHandler {
                     this.mcServer.func_71272_O();
                 } else {
                     BanEntry var2 = new BanEntry(this.playerEntity.username);
-                    var2.func_73689_b("Death in Hardcore");
-                    this.mcServer.getConfigurationManager().getBannedPlayers().func_73706_a(var2);
+                    var2.setReason("Death in Hardcore");
+                    this.mcServer.getConfigurationManager().getBannedPlayers().addBan(var2);
                     this.playerEntity.playerNetServerHandler.kickPlayer("You have died. Game over, man, it\'s game over!");
                 }
             } else {

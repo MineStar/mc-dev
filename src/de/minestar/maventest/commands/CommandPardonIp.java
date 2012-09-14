@@ -26,7 +26,7 @@ public class CommandPardonIp extends AbstractCommand {
         Matcher matcher = PATTERN.matcher(argumentList.getString(0));
 
         if (matcher.matches()) {
-            MinecraftServer.getServer().getConfigurationManager().getBannedIPs().func_73709_b(argumentList.getString(0));
+            MinecraftServer.getServer().getConfigurationManager().getBannedIPs().removeBan(argumentList.getString(0));
             MinestarCommandHandler.notifyAdmins(sender, "commands.unbanip.success", argumentList.getString(0));
         } else {
             throw new SyntaxErrorException("commands.unbanip.invalid");

@@ -38,9 +38,7 @@ public class CommandSay extends AbstractCommand {
     }
 
     /**
-     * Returns a List of strings (chosen from the given strings) which the last
-     * word in the given string array is a beginning-match for. (Tab
-     * completion).
+     * Returns a List of strings (chosen from the given strings) which the last word in the given string array is a beginning-match for. (Tab completion).
      */
     public static List getListOfStringsMatchingLastWord(String[] par0ArrayOfStr, String... par1ArrayOfStr) {
         String var2 = par0ArrayOfStr[par0ArrayOfStr.length - 1];

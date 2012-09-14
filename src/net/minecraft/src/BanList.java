@@ -45,12 +45,12 @@ public class BanList {
         }
     }
 
-    public void func_73706_a(BanEntry par1BanEntry) {
-        this.field_73715_a.func_76116_a(par1BanEntry.func_73684_a(), par1BanEntry);
+    public void addBan(BanEntry par1BanEntry) {
+        this.field_73715_a.func_76116_a(par1BanEntry.getPlayerName(), par1BanEntry);
         this.saveToFileWithHeader();
     }
 
-    public void func_73709_b(String par1Str) {
+    public void removeBan(String par1Str) {
         this.field_73715_a.remove(par1Str);
         this.saveToFileWithHeader();
     }
@@ -61,7 +61,7 @@ public class BanList {
         while (var1.hasNext()) {
             BanEntry var2 = (BanEntry) var1.next();
 
-            if (var2.func_73682_e()) {
+            if (var2.hasExpired()) {
                 var1.remove();
             }
         }
@@ -88,7 +88,7 @@ public class BanList {
                         BanEntry var3 = BanEntry.func_73688_c(var2);
 
                         if (var3 != null) {
-                            this.field_73715_a.func_76116_a(var3.func_73684_a(), var3);
+                            this.field_73715_a.func_76116_a(var3.getPlayerName(), var3);
                         }
                     }
                 }
