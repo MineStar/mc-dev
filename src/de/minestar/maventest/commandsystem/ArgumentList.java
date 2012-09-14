@@ -235,7 +235,10 @@ public class ArgumentList {
      * @return
      */
     public String getString(int index) {
-        return args[index + offset].toString();
+        if (index + offset >= 0 && index + offset < args.length) {
+            return args[index + offset].toString();
+        }
+        return null;
     }
 
     // START GENERIC SHIT
