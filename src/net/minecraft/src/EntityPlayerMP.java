@@ -717,7 +717,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     }
 
     public void sendError(String par1Str) {
-        this.playerNetServerHandler.sendPacket(new Packet3Chat("§3" + par1Str));
+        this.playerNetServerHandler.sendPacket(new Packet3Chat("§c" + par1Str));
     }
 
     public void sendSuccess(String par1Str) {

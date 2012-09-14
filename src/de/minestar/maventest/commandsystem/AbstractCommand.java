@@ -267,7 +267,7 @@ public abstract class AbstractCommand {
      * Print the syntax for this command.
      */
     public final void printWrongSyntax(ICommandSender sender) {
-        sender.sendMessage("Wrong syntax!");
+        sender.sendError("Wrong syntax!");
         this.listCommand(sender);
     }
     /**
@@ -275,15 +275,15 @@ public abstract class AbstractCommand {
      */
     public final void listCommand(ICommandSender sender) {
         if (this.isSuperCommand()) {
-            sender.sendMessage("Possible Subcommands for: " + this.getLabel());
-            sender.sendMessage(this.getSyntax());
+            sender.sendInfo("Possible Subcommands for: " + this.getLabel());
+            sender.sendInfo(this.getSyntax());
         } else {
-            sender.sendMessage(this.getSyntax());
+            sender.sendInfo(this.getSyntax());
         }
 
         ArrayList<AbstractCommand> subCommands = getSubCommands();
         for (AbstractCommand subCommand : subCommands) {
-            sender.sendMessage(subCommand.getSyntax());
+            sender.sendInfo(subCommand.getSyntax());
         }
     }
 
