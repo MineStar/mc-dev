@@ -171,7 +171,7 @@ public class MinestarCommandHandler implements IAdminCommand {
             return list;
         } else {
             if (var3.length > 1) {
-                AbstractCommand var5 = this.registeredCommands.get(var4);
+                AbstractCommand var5 = this.registeredCommands.get("/" + var4);
 
                 if (var5 != null) {
                     return var5.addTabCompletionOptions(par1ICommandSender, createArguments(var3));
