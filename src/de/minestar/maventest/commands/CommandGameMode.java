@@ -16,7 +16,7 @@ import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "gamemode")
 @Arguments(arguments = "0|1|2|classic|creative|adventure [<PlayerName>]")
-@Description(description = "This is a normal command. It is a single command with 1 needed parameter and endless optional parameters.")
+@Description(description = "")
 public class CommandGameMode extends AbstractCommand {
 
     private EnumGameType getGameType(String argument) {
@@ -69,7 +69,8 @@ public class CommandGameMode extends AbstractCommand {
     }
 
     /**
-     * Adds the strings available in this command to the given list of tab completion options.
+     * Adds the strings available in this command to the given list of tab
+     * completion options.
      */
     @Override
     public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {

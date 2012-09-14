@@ -1,7 +1,5 @@
 package de.minestar.maventest.commands;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.server.MinecraftServer;
@@ -15,7 +13,7 @@ import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "pardon")
 @Arguments(arguments = "<PlayerName>")
-@Description(description = "This is a normal command. It is a single command with 1 needed parameter and endless optional parameters.")
+@Description(description = "")
 public class CommandPardon extends AbstractCommand {
 
     @Override

@@ -11,7 +11,7 @@ import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "add")
 @Arguments(arguments = "<Player>")
-@Description(description = "This is a normal command. It is a single command with 1 needed parameter and endless optional parameters.")
+@Description(description = "")
 public class CommandWhitelistAdd extends AbstractCommand {
 
     @Override

@@ -15,7 +15,7 @@ import de.minestar.maventest.commandsystem.annotations.Label;
 
 @Label(label = "ban")
 @Arguments(arguments = "<PlayerName> [Reason...]")
-@Description(description = "This is a normal command. It is a single command with 1 needed parameter and endless optional parameters.")
+@Description(description = "")
 public class CommandBan extends AbstractCommand {
 
     public static final Pattern IPMatcher = Pattern.compile("^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
