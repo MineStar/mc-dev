@@ -18,7 +18,7 @@ import de.minestar.commandsystem.annotations.Label;
 public abstract class AbstractCommand {
 
     // String for no permissions
-    public final static String NO_PERMISSION = "&cYou are not allowed to use this command!";
+    public final static String NO_PERMISSION = "You are not allowed to use this command!";
 
     // vars for the handling of supercommands
     private boolean superCommand = false; // true = this command has subcommands
@@ -82,7 +82,7 @@ public abstract class AbstractCommand {
      * @return True, if the sender has enough permission to use the command Or the permissionnode is empty, so everybody can use it
      */
     private final boolean hasPermission(ICommandSender sender) {
-        return sender.canCommandSenderUseCommand(this.getLabel().replace("/", ""));
+        return sender.canCommandSenderUseCommand(this.getLabel());
     }
 
     /**
@@ -223,7 +223,7 @@ public abstract class AbstractCommand {
      * 
      * @return the complete syntax (including supercommands and the argumentstring)
      */
-    public final String getSyntax() {
+    public final String getCommandWithSyntax() {
         // iterate over every parent and add the label in front of the current
         // syntax
         String syntax = "/" + this.getLabel();
@@ -276,14 +276,14 @@ public abstract class AbstractCommand {
     public final void listCommand(ICommandSender sender) {
         if (this.isSuperCommand()) {
             sender.sendInfo("Possible Subcommands for: " + this.getLabel());
-            sender.sendInfo(this.getSyntax());
+            sender.sendInfo(this.getCommandWithSyntax());
         } else {
-            sender.sendInfo(this.getSyntax());
+            sender.sendInfo(this.getCommandWithSyntax());
         }
 
         ArrayList<AbstractCommand> subCommands = getSubCommands();
         for (AbstractCommand subCommand : subCommands) {
-            sender.sendInfo(subCommand.getSyntax());
+            sender.sendInfo(subCommand.getCommandWithSyntax());
         }
     }
 
