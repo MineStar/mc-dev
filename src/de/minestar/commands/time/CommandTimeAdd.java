@@ -6,6 +6,7 @@ import net.minecraft.src.WorldServer;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
 import de.minestar.commandsystem.CommandHandler;
+import de.minestar.commandsystem.ParseUtils;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -15,10 +16,9 @@ public class CommandTimeAdd extends AbstractCommand {
 
     @Override
     public void execute(ICommandSender sender, ArgumentList argumentList) {
-        int time = parseIntWithMin(sender, argumentList.getString(0), 0);
+        int time = ParseUtils.parseIntWithMin(sender, argumentList.getString(0), 0);
         this.addTime(sender, time);
         CommandHandler.notifyAdmins(sender, "commands.time.added", time);
-
     }
 
     protected void addTime(ICommandSender par1ICommandSender, int par2) {

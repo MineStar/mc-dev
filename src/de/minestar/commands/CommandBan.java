@@ -11,6 +11,7 @@ import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
 import de.minestar.commandsystem.CommandHandler;
+import de.minestar.commandsystem.ParseUtils;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -55,22 +56,19 @@ public class CommandBan extends AbstractCommand {
     }
 
     @Override
-    public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
-        if (par2ArrayOfStr.length == 1) {
-            String var3 = par2ArrayOfStr[par2ArrayOfStr.length - 1];
-            ArrayList<String> var4 = new ArrayList<String>();
-            String[] var5 = MinecraftServer.getServer().getPlayerNamesAsList();
-            int var6 = var5.length;
+    public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] arguments) {
+        if (arguments.length == 1) {
+            String lastArgument = arguments[arguments.length - 1];
+            ArrayList<String> list = new ArrayList<String>();
+            String[] playerList = MinecraftServer.getServer().getPlayerNamesAsList();
+            for (int index = 0; index < playerList.length; ++index) {
+                String playerName = playerList[index];
 
-            for (int var7 = 0; var7 < var6; ++var7) {
-                String var8 = var5[var7];
-
-                if (doesStringStartWith(var3, var8)) {
-                    var4.add(var8);
+                if (ParseUtils.doesStringStartWith(lastArgument, playerName)) {
+                    list.add(playerName);
                 }
             }
-
-            return var4;
+            return list;
         } else {
             return null;
         }

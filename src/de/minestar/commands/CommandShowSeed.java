@@ -1,9 +1,10 @@
 package de.minestar.commands;
 
-import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
+import de.minestar.commandsystem.ParseUtils;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -13,7 +14,7 @@ public class CommandShowSeed extends AbstractCommand {
 
     @Override
     public void execute(ICommandSender sender, ArgumentList argumentList) {
-        EntityPlayer player = getCommandSenderAsPlayer(sender);
+        EntityPlayerMP player = ParseUtils.getCommandSenderAsPlayer(sender);
         sender.sendInfo("Seed: " + player.worldObj.getSeed());
     }
 }

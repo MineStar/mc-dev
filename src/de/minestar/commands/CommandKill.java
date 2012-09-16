@@ -9,6 +9,7 @@ import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
+import de.minestar.commandsystem.ParseUtils;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -33,7 +34,7 @@ public class CommandKill extends AbstractCommand {
                 sender.sendMessage("Ouch. That look like it hurt.");
             }
         } else {
-            target = this.getCommandSenderAsPlayer(sender);
+            target = ParseUtils.getCommandSenderAsPlayer(sender);
 
             if (target == null) {
                 sender.sendError("Player '" + sender.getCommandSenderName() + "' not found!");
@@ -57,7 +58,7 @@ public class CommandKill extends AbstractCommand {
             for (int var7 = 0; var7 < var6; ++var7) {
                 String var8 = var5[var7];
 
-                if (doesStringStartWith(var3, var8)) {
+                if (ParseUtils.doesStringStartWith(var3, var8)) {
                     var4.add(var8);
                 }
             }

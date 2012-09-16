@@ -10,6 +10,7 @@ import net.minecraft.src.StatCollector;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
 import de.minestar.commandsystem.CommandHandler;
+import de.minestar.commandsystem.ParseUtils;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -71,7 +72,7 @@ public class CommandGameMode extends AbstractCommand {
      */
     @Override
     public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
-        return par2ArrayOfStr.length == 1 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, new String[]{"survival", "creative", "adventure"}) : (par2ArrayOfStr.length == 2 ? getListOfStringsMatchingLastWord(par2ArrayOfStr, this.getPlayerList()) : null);
+        return par2ArrayOfStr.length == 1 ? ParseUtils.getListOfStringsMatchingLastWord(par2ArrayOfStr, new String[]{"survival", "creative", "adventure"}) : (par2ArrayOfStr.length == 2 ? ParseUtils.getListOfStringsMatchingLastWord(par2ArrayOfStr, this.getPlayerList()) : null);
     }
 
     protected String[] getPlayerList() {

@@ -162,29 +162,29 @@ public class CommandHandler implements IAdminCommand {
         }
     }
 
-    public List<String> getTabCompletionOptions(ICommandSender par1ICommandSender, String par2Str) {
-        String[] var3 = par2Str.split(" ", -1);
-        String var4 = var3[0];
+    public List<String> getTabCompletionOptions(ICommandSender sender, String commandString) {
+        String[] split = commandString.split(" ", -1);
+        String label = split[0];
 
-        if (var3.length == 1) {
+        if (split.length == 1) {
             ArrayList<String> list = new ArrayList<String>();
-            Iterator<Entry<String, AbstractCommand>> var6 = this.registeredCommands.entrySet().iterator();
+            Iterator<Entry<String, AbstractCommand>> iterator = this.registeredCommands.entrySet().iterator();
 
-            while (var6.hasNext()) {
-                Entry<String, AbstractCommand> var7 = var6.next();
+            while (iterator.hasNext()) {
+                Entry<String, AbstractCommand> entry = iterator.next();
 
-                if (AbstractCommand.doesStringStartWith("/" + var4, var7.getKey()) && var7.getValue().canCommandSenderUseCommand(par1ICommandSender)) {
-                    list.add(var7.getKey().substring(1));
+                if (ParseUtils.doesStringStartWith("/" + label, entry.getKey()) && entry.getValue().hasPermission(sender)) {
+                    list.add(entry.getKey().substring(1));
                 }
             }
 
             return list;
         } else {
-            if (var3.length > 1) {
-                AbstractCommand var5 = this.registeredCommands.get("/" + var4);
+            if (split.length > 1) {
+                AbstractCommand command = this.registeredCommands.get("/" + label);
 
-                if (var5 != null) {
-                    return var5.addTabCompletionOptions(par1ICommandSender, createArguments(var3));
+                if (command != null) {
+                    return command.addTabCompletionOptions(sender, createArguments(split));
                 }
             }
 

@@ -5,6 +5,7 @@ import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
 import de.minestar.commandsystem.CommandHandler;
+import de.minestar.commandsystem.ParseUtils;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -21,7 +22,7 @@ public class CommandTimeSet extends AbstractCommand {
         else if (timeString.equalsIgnoreCase("night"))
             time = 12500;
         else
-            time = parseIntWithMin(sender, timeString, 0);
+            time = ParseUtils.parseIntWithMin(sender, timeString, 0);
 
         setTimeInAllWorlds(sender, time);
         CommandHandler.notifyAdmins(sender, "commands.time.set", time);

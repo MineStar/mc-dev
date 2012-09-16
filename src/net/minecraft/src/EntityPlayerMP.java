@@ -708,6 +708,10 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
         this.playerNetServerHandler.sendPacket(new Packet70GameEvent(3, par1EnumGameType.getID()));
     }
 
+    // ///////////////////////////////////////////////////////////////////////////////
+    //
+    // BEGIN CHANGES
+
     public void sendMessage(String par1Str) {
         this.playerNetServerHandler.sendPacket(new Packet3Chat(par1Str));
     }
@@ -723,6 +727,10 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
     public void sendSuccess(String par1Str) {
         this.playerNetServerHandler.sendPacket(new Packet3Chat("§a" + par1Str));
     }
+
+    // END CHANGES
+    //
+    // ///////////////////////////////////////////////////////////////////////////////
 
     /**
      * Returns true if the command sender is allowed to use the given command.

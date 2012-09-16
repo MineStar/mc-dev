@@ -819,7 +819,7 @@ public class NetServerHandler extends NetHandler {
         StringBuilder var2 = new StringBuilder();
         String var4;
 
-        for (Iterator var3 = this.mcServer.func_71248_a(this.playerEntity, par1Packet203AutoComplete.func_73473_d()).iterator(); var3.hasNext(); var2.append(var4)) {
+        for (Iterator var3 = this.mcServer.getTabCompletionOptions(this.playerEntity, par1Packet203AutoComplete.func_73473_d()).iterator(); var3.hasNext(); var2.append(var4)) {
             var4 = (String) var3.next();
 
             if (var2.length() > 0) {

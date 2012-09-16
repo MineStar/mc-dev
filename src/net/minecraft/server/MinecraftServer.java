@@ -23,7 +23,6 @@ import net.minecraft.src.CrashReport;
 import net.minecraft.src.DedicatedServer;
 import net.minecraft.src.DemoWorldServer;
 import net.minecraft.src.EnumGameType;
-import net.minecraft.src.ICommandManager;
 import net.minecraft.src.ICommandSender;
 import net.minecraft.src.IPlayerUsage;
 import net.minecraft.src.IProgressUpdate;
@@ -52,8 +51,8 @@ import net.minecraft.src.WorldServer;
 import net.minecraft.src.WorldServerMulti;
 import net.minecraft.src.WorldSettings;
 import net.minecraft.src.WorldType;
-import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.CommandHandler;
+import de.minestar.commandsystem.ParseUtils;
 
 public abstract class MinecraftServer implements Runnable, IPlayerUsage, ICommandSender {
     /** The logging system. */
@@ -770,13 +769,13 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
         return par1CrashReport;
     }
 
-    public List<String> func_71248_a(ICommandSender par1ICommandSender, String par2Str) {
-        ArrayList<String> var3 = new ArrayList<String>();
+    public List<String> getTabCompletionOptions(ICommandSender sender, String commandString) {
+        ArrayList<String> list = new ArrayList<String>();
 
-        if (par2Str.startsWith("/")) {
-            par2Str = par2Str.substring(1);
-            boolean var10 = !par2Str.contains(" ");
-            List<String> var11 = this.commandHandler.getTabCompletionOptions(par1ICommandSender, par2Str);
+        if (commandString.startsWith("/")) {
+            commandString = commandString.substring(1);
+            boolean var10 = !commandString.contains(" ");
+            List<String> var11 = this.commandHandler.getTabCompletionOptions(sender, commandString);
 
             if (var11 != null) {
                 Iterator<String> var12 = var11.iterator();
@@ -785,16 +784,16 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
                     String var13 = (String) var12.next();
 
                     if (var10) {
-                        var3.add("/" + var13);
+                        list.add("/" + var13);
                     } else {
-                        var3.add(var13);
+                        list.add(var13);
                     }
                 }
             }
 
-            return var3;
+            return list;
         } else {
-            String[] var4 = par2Str.split(" ", -1);
+            String[] var4 = commandString.split(" ", -1);
             String var5 = var4[var4.length - 1];
             String[] var6 = this.serverConfigManager.getPlayerNamesAsList();
             int var7 = var6.length;
@@ -802,12 +801,12 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
             for (int var8 = 0; var8 < var7; ++var8) {
                 String var9 = var6[var8];
 
-                if (AbstractCommand.doesStringStartWith(var5, var9)) {
-                    var3.add(var9);
+                if (ParseUtils.doesStringStartWith(var5, var9)) {
+                    list.add(var9);
                 }
             }
 
-            return var3;
+            return list;
         }
     }
 
