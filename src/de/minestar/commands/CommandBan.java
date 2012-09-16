@@ -11,7 +11,7 @@ import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
 import de.minestar.commandsystem.CommandHandler;
-import de.minestar.commandsystem.ParseUtils;
+import de.minestar.commandsystem.CommandUtils;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -64,7 +64,7 @@ public class CommandBan extends AbstractCommand {
             for (int index = 0; index < playerList.length; ++index) {
                 String playerName = playerList[index];
 
-                if (ParseUtils.doesStringStartWith(lastArgument, playerName)) {
+                if (CommandUtils.doesStringStartWith(lastArgument, playerName)) {
                     list.add(playerName);
                 }
             }

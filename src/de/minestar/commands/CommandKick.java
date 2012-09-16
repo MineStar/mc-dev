@@ -9,7 +9,7 @@ import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
 import de.minestar.commandsystem.CommandHandler;
-import de.minestar.commandsystem.ParseUtils;
+import de.minestar.commandsystem.CommandUtils;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -58,7 +58,7 @@ public class CommandKick extends AbstractCommand {
             for (int var7 = 0; var7 < var6; ++var7) {
                 String var8 = var5[var7];
 
-                if (ParseUtils.doesStringStartWith(var3, var8)) {
+                if (CommandUtils.doesStringStartWith(var3, var8)) {
                     var4.add(var8);
                 }
             }

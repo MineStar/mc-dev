@@ -52,7 +52,7 @@ import net.minecraft.src.WorldServerMulti;
 import net.minecraft.src.WorldSettings;
 import net.minecraft.src.WorldType;
 import de.minestar.commandsystem.CommandHandler;
-import de.minestar.commandsystem.ParseUtils;
+import de.minestar.commandsystem.CommandUtils;
 
 public abstract class MinecraftServer implements Runnable, IPlayerUsage, ICommandSender {
     /** The logging system. */
@@ -801,7 +801,7 @@ public abstract class MinecraftServer implements Runnable, IPlayerUsage, IComman
             for (int var8 = 0; var8 < var7; ++var8) {
                 String var9 = var6[var8];
 
-                if (ParseUtils.doesStringStartWith(var5, var9)) {
+                if (CommandUtils.doesStringStartWith(var5, var9)) {
                     list.add(var9);
                 }
             }

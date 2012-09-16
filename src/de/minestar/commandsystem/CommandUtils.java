@@ -11,7 +11,7 @@ import net.minecraft.src.ICommandSender;
 import net.minecraft.src.NumberInvalidException;
 import net.minecraft.src.PlayerNotFoundException;
 
-public class ParseUtils {
+public class CommandUtils {
 
     /**
      * Returns true if the given substring is exactly equal to the start of the given string (case insensitive).

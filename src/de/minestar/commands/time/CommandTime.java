@@ -6,7 +6,7 @@ import net.minecraft.src.WorldServer;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
 import de.minestar.commandsystem.CommandHandler;
-import de.minestar.commandsystem.ParseUtils;
+import de.minestar.commandsystem.CommandUtils;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -18,7 +18,7 @@ public class CommandTime extends AbstractCommand {
     public void execute(ICommandSender sender, ArgumentList argumentList) {
         if (argumentList.getString(0).equalsIgnoreCase("ADD")) {
             // ADD THE TIME
-            int time = ParseUtils.parseIntWithMin(sender, argumentList.getString(0), 0);
+            int time = CommandUtils.parseIntWithMin(sender, argumentList.getString(0), 0);
             this.addTimeInAllWorlds(time);
             CommandHandler.notifyAdmins(sender, "commands.time.added", time);
         } else {
@@ -30,7 +30,7 @@ public class CommandTime extends AbstractCommand {
             else if (timeString.equalsIgnoreCase("night"))
                 time = 12500;
             else
-                time = ParseUtils.parseIntWithMin(sender, timeString, 0);
+                time = CommandUtils.parseIntWithMin(sender, timeString, 0);
 
             this.setTimeInAllWorlds(time);
             CommandHandler.notifyAdmins(sender, "commands.time.set", time);

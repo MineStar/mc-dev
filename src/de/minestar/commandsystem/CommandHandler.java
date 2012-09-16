@@ -20,9 +20,7 @@ import de.minestar.commands.CommandOp;
 import de.minestar.commands.CommandPardon;
 import de.minestar.commands.CommandPardonIp;
 import de.minestar.commands.CommandPublishLocal;
-import de.minestar.commands.CommandSaveAll;
-import de.minestar.commands.CommandSaveOff;
-import de.minestar.commands.CommandSaveOn;
+import de.minestar.commands.CommandSave;
 import de.minestar.commands.CommandSay;
 import de.minestar.commands.CommandShowSeed;
 import de.minestar.commands.CommandStop;
@@ -55,9 +53,7 @@ public class CommandHandler implements IAdminCommand {
         this.registerCommand(new CommandPardon());
         this.registerCommand(new CommandPardonIp());
         this.registerCommand(new CommandPublishLocal());
-        this.registerCommand(new CommandSaveAll());
-        this.registerCommand(new CommandSaveOff());
-        this.registerCommand(new CommandSaveOn());
+        this.registerCommand(new CommandSave());
         this.registerCommand(new CommandSay());
         this.registerCommand(new CommandShowSeed());
         this.registerCommand(new CommandStop());
@@ -173,7 +169,7 @@ public class CommandHandler implements IAdminCommand {
             while (iterator.hasNext()) {
                 Entry<String, AbstractCommand> entry = iterator.next();
 
-                if (ParseUtils.doesStringStartWith("/" + label, entry.getKey()) && entry.getValue().hasPermission(sender)) {
+                if (CommandUtils.doesStringStartWith("/" + label, entry.getKey()) && entry.getValue().hasPermission(sender)) {
                     list.add(entry.getKey().substring(1));
                 }
             }

@@ -7,7 +7,7 @@ import net.minecraft.src.ICommandSender;
 import net.minecraft.src.Packet3Chat;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.ParseUtils;
+import de.minestar.commandsystem.CommandUtils;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -33,6 +33,6 @@ public class CommandSay extends AbstractCommand {
 
     @Override
     public List<String> addTabCompletionOptions(ICommandSender par1ICommandSender, String[] par2ArrayOfStr) {
-        return par2ArrayOfStr.length >= 1 ? ParseUtils.getListOfStringsMatchingLastWord(par2ArrayOfStr, MinecraftServer.getServer().getPlayerNamesAsList()) : null;
+        return par2ArrayOfStr.length >= 1 ? CommandUtils.getListOfStringsMatchingLastWord(par2ArrayOfStr, MinecraftServer.getServer().getPlayerNamesAsList()) : null;
     }
 }

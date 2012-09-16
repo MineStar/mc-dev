@@ -9,7 +9,7 @@ import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
-import de.minestar.commandsystem.ParseUtils;
+import de.minestar.commandsystem.CommandUtils;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
@@ -25,16 +25,16 @@ public class CommandKill extends AbstractCommand {
                 // find target
                 target = MinecraftServer.getServer().getConfigurationManager().getPlayerEntity(playerName);
                 if (target == null) {
-                    sender.sendMessage("§cPlayer '" + playerName + "' not found!");
+                    sender.sendError("Player '" + playerName + "' not found!");
                     continue;
                 }
 
                 // ATTACK PLAYER
                 target.attackEntityFrom(DamageSource.outOfWorld, 1000);
-                sender.sendMessage("Ouch. That look like it hurt.");
+                sender.sendInfo("Ouch. That look like it hurt.");
             }
         } else {
-            target = ParseUtils.getCommandSenderAsPlayer(sender);
+            target = CommandUtils.getCommandSenderAsPlayer(sender);
 
             if (target == null) {
                 sender.sendError("Player '" + sender.getCommandSenderName() + "' not found!");
@@ -58,7 +58,7 @@ public class CommandKill extends AbstractCommand {
             for (int var7 = 0; var7 < var6; ++var7) {
                 String var8 = var5[var7];
 
-                if (ParseUtils.doesStringStartWith(var3, var8)) {
+                if (CommandUtils.doesStringStartWith(var3, var8)) {
                     var4.add(var8);
                 }
             }
