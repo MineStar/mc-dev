@@ -18,33 +18,35 @@ public class CommandTp extends AbstractCommand {
     @Override
     public void execute(ICommandSender sender, ArgumentList argumentList) {
         MinecraftServer server = MinecraftServer.getServer();
-        EntityPlayerMP player;
+        EntityPlayerMP senderPlayer;
 
         if (argumentList.length() != 2 && argumentList.length() != 4) {
-            player = CommandUtils.getCommandSenderAsPlayer(sender);
+            senderPlayer = CommandUtils.getCommandSenderAsPlayer(sender);
         } else {
-            player = server.getConfigurationManager().getPlayerEntity(argumentList.getString(0));
-            if (player == null)
+            senderPlayer = server.getConfigurationManager().getPlayerEntity(argumentList.getString(0));
+            if (senderPlayer == null)
                 throw new PlayerNotFoundException();
         }
 
         if (argumentList.length() != 3 && argumentList.length() != 4) {
             if (argumentList.length() == 1 || argumentList.length() == 2) {
-                EntityPlayerMP player2 = server.getConfigurationManager().getPlayerEntity(argumentList.getString(argumentList.length() - 1));
+                // teleport player to player
+                EntityPlayerMP targetPlayer = server.getConfigurationManager().getPlayerEntity(argumentList.getString(argumentList.length() - 1));
 
-                if (player2 == null)
+                if (targetPlayer == null)
                     throw new PlayerNotFoundException();
 
-                player.playerNetServerHandler.teleportTo(player2.posX, player2.posY, player2.posZ, player2.rotationYaw, player2.rotationPitch);
-                CommandHandler.notifyAdmins(sender, "commands.tp.success", player.getEntityName(), player2.getEntityName());
-            } else if (player.worldObj != null) {
+                senderPlayer.playerNetServerHandler.teleportTo(targetPlayer.posX, targetPlayer.posY, targetPlayer.posZ, targetPlayer.rotationYaw, targetPlayer.rotationPitch);
+                CommandHandler.notifyAdmins(sender, "commands.tp.success", senderPlayer.getEntityName(), targetPlayer.getEntityName());
+            } else if (senderPlayer.worldObj != null) {
+                // teleport player to coordinates
                 int i = argumentList.length() - 3;
                 int max = 30000000;
                 int x = CommandUtils.parseIntBounded(sender, argumentList.getString(i++), -max, max);
                 int y = CommandUtils.parseIntBounded(sender, argumentList.getString(i++), 0, 256);
                 int z = CommandUtils.parseIntBounded(sender, argumentList.getString(i++), -max, max);
-                player.setPositionAndUpdate((double) ((float) x + 0.5F), (double) y, (double) ((float) z + 0.5F));
-                CommandHandler.notifyAdmins(sender, "commands.tp.coordinates", player.getEntityName(), x, y, z);
+                senderPlayer.setPositionAndUpdate((double) ((float) x + 0.5F), (double) y, (double) ((float) z + 0.5F));
+                CommandHandler.notifyAdmins(sender, "commands.tp.coordinates", senderPlayer.getEntityName(), x, y, z);
             }
         }
 
