@@ -112,4 +112,27 @@ public class CommandUtils {
     public static int parseIntWithMin(ICommandSender sender, String text, int minimum) {
         return parseIntBounded(sender, text, minimum, Integer.MAX_VALUE);
     }
+
+    /**
+     * Joins the given string array into a "x, y, and z" seperated string.
+     */
+    public static String joinNiceString(Object[] arguments) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int index = 0; index < arguments.length; ++index) {
+            String string = arguments[index].toString();
+
+            if (index > 0) {
+                if (index == arguments.length - 1) {
+                    builder.append(" and ");
+                } else {
+                    builder.append(", ");
+                }
+            }
+
+            builder.append(string);
+        }
+
+        return builder.toString();
+    }
 }
