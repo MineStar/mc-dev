@@ -24,10 +24,10 @@ import de.minestar.commands.CommandSave;
 import de.minestar.commands.CommandSay;
 import de.minestar.commands.CommandShowSeed;
 import de.minestar.commands.CommandStop;
+import de.minestar.commands.CommandTime;
 import de.minestar.commands.CommandToggleDownfall;
 import de.minestar.commands.CommandTp;
 import de.minestar.commands.CommandXP;
-import de.minestar.commands.time.CommandTime;
 import de.minestar.commands.whitelist.CommandWhitelist;
 
 public class CommandHandler implements IAdminCommand {

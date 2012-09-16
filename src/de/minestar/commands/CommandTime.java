@@ -1,4 +1,4 @@
-package de.minestar.commands.time;
+package de.minestar.commands;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.ICommandSender;
