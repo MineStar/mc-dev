@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.src.ICommandSender;
+import de.minestar.commandsystem.annotations.Alias;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.ExecuteSuperCommand;
 import de.minestar.commandsystem.annotations.Label;
@@ -27,6 +28,7 @@ public abstract class AbstractCommand {
 
     // needed vars for each command
     private final String commandLabel;
+    private String[] aliases;
     private String arguments;
 
     // list of subcommands
@@ -42,6 +44,7 @@ public abstract class AbstractCommand {
 
         // fetch the annotations for this command
         Label labelAnnotation = this.getClass().getAnnotation(Label.class);
+        Alias aliasAnnotation = this.getClass().getAnnotation(Alias.class);
         Arguments argumentAnnotation = this.getClass().getAnnotation(Arguments.class);
 
         // Save the label. NOTE: If the label is not set, this will throw an
@@ -57,6 +60,13 @@ public abstract class AbstractCommand {
             if (this.commandLabel.length() < 1) {
                 throw new RuntimeException("Could not create command '" + this.getClass().getSimpleName() + "'! Commandlabel is missing!");
             }
+        }
+
+        // get the aliases
+        if (aliasAnnotation == null) {
+            this.aliases = new String[0];
+        } else {
+            this.aliases = aliasAnnotation.aliases();
         }
 
         // get the argument
@@ -174,6 +184,15 @@ public abstract class AbstractCommand {
     }
 
     /**
+     * Get the aliases of this command.
+     * 
+     * @return the aliases
+     */
+    public final String[] getAliases() {
+        return aliases;
+    }
+
+    /**
      * Get all subcommands
      * 
      * @return all subcommands
@@ -249,6 +268,17 @@ public abstract class AbstractCommand {
 
         // store the command
         this.subCommands.put(command.getLabel(), command);
+
+        String[] aliases = command.getAliases();
+        for (String alias : aliases) {
+            // CHECK: is the command already registered?
+            if (this.subCommands.containsKey(alias)) {
+                throw new RuntimeException("Alias '" + alias + "' is already registered!");
+            }
+
+            // register the command
+            this.subCommands.put(alias, command);
+        }
 
         // finally update the command and initialize it
         command.setParentCommand(this);

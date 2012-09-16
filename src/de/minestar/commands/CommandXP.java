@@ -10,7 +10,7 @@ import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
 @Label(label = "xp")
-@Arguments(arguments = "")
+@Arguments(arguments = "<Amount> [<Player>]")
 public class CommandXP extends AbstractCommand {
 
     @Override

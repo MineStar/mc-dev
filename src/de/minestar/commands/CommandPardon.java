@@ -8,10 +8,12 @@ import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
 import de.minestar.commandsystem.CommandHandler;
 import de.minestar.commandsystem.CommandUtils;
+import de.minestar.commandsystem.annotations.Alias;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
 @Label(label = "pardon")
+@Alias(aliases = {"unban"})
 @Arguments(arguments = "<PlayerName>")
 public class CommandPardon extends AbstractCommand {
 

@@ -75,12 +75,23 @@ public class CommandHandler implements IAdminCommand {
         // set the pluginame
 
         // CHECK: is the command already registered?
-        if (this.registeredCommands.containsKey(command.getLabel())) {
+        if (this.registeredCommands.containsKey("/" + command.getLabel())) {
             throw new RuntimeException("Command '" + command.getLabel() + "' is already registered in '" + command.getCommand() + "'!");
         }
 
         // register the command
         this.registeredCommands.put("/" + command.getLabel(), command);
+
+        String[] aliases = command.getAliases();
+        for (String alias : aliases) {
+            // CHECK: is the command already registered?
+            if (this.registeredCommands.containsKey("/" + alias)) {
+                throw new RuntimeException("Alias '" + alias + "' is already registered!");
+            }
+
+            // register the command
+            this.registeredCommands.put("/" + alias, command);
+        }
 
         // initialize the subcommands for the given command
         command.initializeSubCommands();

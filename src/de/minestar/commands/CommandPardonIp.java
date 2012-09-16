@@ -9,10 +9,12 @@ import net.minecraft.src.SyntaxErrorException;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
 import de.minestar.commandsystem.CommandHandler;
+import de.minestar.commandsystem.annotations.Alias;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
-@Label(label = "pardon-id")
+@Label(label = "pardon-ip")
+@Alias(aliases = {"unban-ip"})
 @Arguments(arguments = "<IP-Address>")
 public class CommandPardonIp extends AbstractCommand {
 
