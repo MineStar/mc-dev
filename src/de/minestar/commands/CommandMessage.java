@@ -1,10 +1,14 @@
 package de.minestar.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.src.EntityPlayerMP;
 import net.minecraft.src.ICommandSender;
 import de.minestar.commandsystem.AbstractCommand;
 import de.minestar.commandsystem.ArgumentList;
+import de.minestar.commandsystem.CommandUtils;
 import de.minestar.commandsystem.annotations.Alias;
 import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
@@ -36,5 +40,25 @@ public class CommandMessage extends AbstractCommand {
         }
 
         return sBuilder.toString();
+    }
+
+    @Override
+    public List<String> addTabCompletionOptions(ICommandSender sender, String[] arguments) {
+        if (arguments.length == 1) {
+            String lastArgument = arguments[arguments.length - 1];
+            ArrayList<String> list = new ArrayList<String>();
+            String[] playerList = MinecraftServer.getServer().getPlayerNamesAsList();
+
+            for (int index = 0; index < playerList.length; ++index) {
+                String playerName = playerList[index];
+                if (CommandUtils.doesStringStartWith(lastArgument, playerName)) {
+                    list.add(playerName);
+                }
+            }
+
+            return list;
+        } else {
+            return null;
+        }
     }
 }
