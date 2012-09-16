@@ -269,6 +269,7 @@ public abstract class AbstractCommand {
         // store the command
         this.subCommands.put(command.getLabel(), command);
 
+        // register aliases
         String[] aliases = command.getAliases();
         for (String alias : aliases) {
             // CHECK: is the command already registered?

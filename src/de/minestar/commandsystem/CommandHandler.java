@@ -82,6 +82,7 @@ public class CommandHandler implements IAdminCommand {
         // register the command
         this.registeredCommands.put("/" + command.getLabel(), command);
 
+        // register aliases
         String[] aliases = command.getAliases();
         for (String alias : aliases) {
             // CHECK: is the command already registered?
