@@ -13,7 +13,7 @@ import de.minestar.commandsystem.annotations.Label;
 
 @Label(label = "tp")
 // TODO: What kind of arguments?
-@Arguments(arguments = "")
+@Arguments(arguments = "<ToPlayer|X> [<PlayerToTeleport|Y> [Z]]")
 public class CommandTp extends AbstractCommand {
 
     @Override
