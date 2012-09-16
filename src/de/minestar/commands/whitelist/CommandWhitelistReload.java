@@ -9,7 +9,7 @@ import de.minestar.commandsystem.annotations.Arguments;
 import de.minestar.commandsystem.annotations.Label;
 
 @Label(label = "reload")
-@Arguments(arguments = "<Player>")
+@Arguments(arguments = "")
 public class CommandWhitelistReload extends AbstractCommand {
 
     @Override
